@@ -241,7 +241,7 @@ body::before {
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.12} }
 
 /* Hero name — font scales relative to actual available content width */
-.hero-name-row-1 { display: flex; align-items: center; gap: 0; overflow: hidden; }
+.hero-name-row-1 { display: flex; align-items: center; gap: 0; }
 .name-first, .name-last {
   font-family: var(--font-head);
   font-size: clamp(2rem, calc((100vw - 500px) / 11), 5rem);
@@ -365,14 +365,10 @@ body::before {
 }
 .scroll-arrow:hover { border-color: var(--accent); color: var(--accent); background: rgba(124,92,252,0.1); }
 .proj-scroll-viewport {
-  overflow-x: hidden; overflow-y: visible;
+  overflow: visible;
   position: relative; margin-top: 0;
-}
-.proj-scroll-viewport::after {
-  content: '';
-  position: absolute; top: 0; right: 0; bottom: 8px; width: 100px;
-  background: linear-gradient(to right, transparent, var(--bg));
-  pointer-events: none; z-index: 2;
+  mask-image: linear-gradient(to right, black 90%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, black 90%, transparent 100%);
 }
 .proj-track {
   display: flex; gap: 1rem;
@@ -499,26 +495,29 @@ textarea.form-input { resize: vertical; min-height: 105px; }
 
   /* Sidebar becomes off-canvas overlay — hidden until hamburger clicked */
   .sidebar {
-    left: 0 !important;
-    top: 0 !important;
-    bottom: 0 !important;
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--sidebar-w);
     border-radius: 0 var(--radius-sidebar) var(--radius-sidebar) 0;
     transform: translateX(-110%);
     transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 999 !important;
+    z-index: 1000;
+    will-change: transform;
   }
-  .sidebar.open { transform: translateX(0) !important; }
+  .sidebar.open { transform: translateX(0); }
   .sidebar-close { display: flex; }
 
   /* Main takes full width, pushed below fixed topbar */
   .main {
-    margin-left: 0 !important;
-    padding: 1.2rem 1rem !important;
-    padding-top: calc(58px + 1.2rem) !important;
+    margin-left: 0;
+    padding: 1.2rem 1rem;
+    padding-top: calc(58px + 1.2rem);
   }
 
   /* Hero name: scale to fit mobile screen width */
-  .hero-name-row-1 { overflow: hidden; }
+  .hero-name-row-1 { overflow: visible; }
   .name-first, .name-last {
     font-size: clamp(1.5rem, calc((100vw - 3rem) / 13), 2.8rem);
   }
@@ -572,7 +571,6 @@ textarea.form-input { resize: vertical; min-height: 105px; }
 
   /* All grids go single column */
   .projects-grid  { grid-template-columns: 1fr; }
-  .videos-grid    { grid-template-columns: 1fr; }
   .about-layout   { grid-template-columns: 1fr; }
   .contact-layout { grid-template-columns: 1fr; }
 
@@ -706,7 +704,7 @@ textarea.form-input { resize: vertical; min-height: 105px; }
   <div class="cv-section">
     <div class="section-header">
       <div class="section-title">CV Highlights</div>
-      <button class="see-more" onclick="nav('about',document.querySelectorAll('.nav-link')[3])">Full profile →</button>
+      <button class="see-more" onclick="nav('about',document.querySelectorAll('.nav-link')[2])">Full profile →</button>
     </div>
     <div class="cv-body">
       <div>
@@ -833,7 +831,7 @@ textarea.form-input { resize: vertical; min-height: 105px; }
         <p class="about-text">Hey, I'm Tomás — a 17-year-old Full-Stack Developer from Porto, Portugal. I've been coding seriously for years and recently completed my Professional Programming Course with an 18/20 average.</p>
         <p class="about-text">My approach blends strong engineering fundamentals with genuine interest in UX and clean architecture. I care deeply about performance, intuitive interfaces, and writing code that other developers can work with. Currently preparing to enter Computer Science Engineering with a long-term focus on AI &amp; Machine Learning.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:1.5rem;">
-          <button class="btn-primary" onclick="nav('contact',document.querySelectorAll('.nav-link')[4])">Get in Touch →</button>
+          <button class="btn-primary" onclick="nav('contact',document.querySelectorAll('.nav-link')[3])">Get in Touch →</button>
           <a class="btn-outline" href="#">View CV ↓</a>
         </div>
       </div>
