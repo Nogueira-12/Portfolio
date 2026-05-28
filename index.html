@@ -425,17 +425,6 @@ body::before {
 .project-card-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; margin-bottom: 1rem; }
 .project-card-tags { display: flex; gap: 5px; flex-wrap: wrap; }
  
-/* ── VIDEOS ── */
-.videos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
-.video-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; transition: all 0.25s; cursor: pointer; }
-.video-card:hover { border-color: var(--border-hover); transform: translateY(-3px); }
-.video-thumb { height: 175px; display: flex; align-items: center; justify-content: center; position: relative; font-size: 2.5rem; }
-.video-play { position: absolute; width: 48px; height: 48px; border-radius: 50%; background: rgba(124,92,252,0.9); display: flex; align-items: center; justify-content: center; font-size: 1rem; transition: transform 0.2s; }
-.video-card:hover .video-play { transform: scale(1.1); }
-.video-info { padding: 1rem 1.2rem; }
-.video-title { font-family: var(--font-head); font-size: 0.87rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-.video-meta { font-size: 0.75rem; color: var(--muted); }
- 
 /* ── ABOUT ── */
 .about-layout { display: grid; grid-template-columns: 1fr 330px; gap: 2rem; }
 .about-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 2rem; }
@@ -496,9 +485,6 @@ textarea.form-input { resize: vertical; min-height: 105px; }
     </button>
     <button class="nav-link" onclick="nav('projects',this)">
       <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5"/><rect x="3" y="13" width="8" height="8" rx="1.5"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>Projects
-    </button>
-    <button class="nav-link" onclick="nav('videos',this)">
-      <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="5" width="20" height="14" rx="2"/><polygon points="9,9 16,12 9,15" fill="currentColor" stroke="none"/></svg>Videos
     </button>
     <button class="nav-link" onclick="nav('about',this)">
       <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>About
@@ -723,19 +709,6 @@ textarea.form-input { resize: vertical; min-height: 105px; }
     <a class="project-card" href="#"><div class="project-card-cover" style="background:linear-gradient(135deg,#1a1200,#3a2d00)">📊</div><div class="project-card-body"><div class="project-card-name">Analytics & Dashboard</div><p class="project-card-desc">Real-time statistics and analytics dashboard for club managers with data visualization, member insights, and financial tracking.</p><div class="project-card-tags"><span class="tag tag-amber">PHP</span><span class="tag tag-pink">Data Visualization</span></div></div></a>
     <a class="project-card" href="#"><div class="project-card-cover" style="background:linear-gradient(135deg,#001a10,#003d2a)">🌐</div><div class="project-card-body"><div class="project-card-name">Social Network Integration</div><p class="project-card-desc">Built-in social features including posts, comments, likes, saves, and reports. Real-time interaction system with content moderation capabilities.</p><div class="project-card-tags"><span class="tag tag-teal">Ruby Rails</span><span class="tag tag-purple">Real-time</span></div></div></a>
     <a class="project-card" href="#"><div class="project-card-cover" style="background:linear-gradient(135deg,#1a001a,#3a0040)">📱</div><div class="project-card-body"><div class="project-card-name">Responsive Web Design</div><p class="project-card-desc">Mobile-first approach ensuring seamless experience across all devices. Clean, modern interfaces with intuitive UX design.</p><div class="project-card-tags"><span class="tag tag-pink">Mobile-First</span><span class="tag tag-purple">CSS3</span></div></div></a>
-  </div>
-  <div class="social-footer"><span class="sf-label">Connect</span><a class="sf-btn" href="https://github.com/Nogueira-12" target="_blank">⊕ GitHub</a><a class="sf-btn" href="https://www.linkedin.com/in/tomás-nogueira-33b347402/" target="_blank">⊕ LinkedIn</a><a class="sf-btn" href="https://www.instagram.com/nogueira.__.12/" target="_blank">⊕ Instagram</a></div>
-</div>
- 
-<!-- ════════════════ VIDEOS ════════════════ -->
-<div id="page-videos" class="page">
-  <h1 class="page-title">Videos</h1>
-  <p class="page-subtitle">Project walkthroughs, coding tutorials, and learning resources.</p>
-  <div class="videos-grid">
-    <div class="video-card"><div class="video-thumb" style="background:linear-gradient(135deg,#1a0a2e,#2d1060)">🎬<div class="video-play">▶</div></div><div class="video-info"><div class="video-title">Building a Real-Time Dashboard with React & WebSockets</div><div class="video-meta">42 min · 12k views</div></div></div>
-    <div class="video-card"><div class="video-thumb" style="background:linear-gradient(135deg,#0a1a1a,#0d3d3a)">🎬<div class="video-play">▶</div></div><div class="video-info"><div class="video-title">Designing APIs That Don't Break — FastAPI Deep Dive</div><div class="video-meta">28 min · 8k views</div></div></div>
-    <div class="video-card"><div class="video-thumb" style="background:linear-gradient(135deg,#1a0d1a,#3d1440)">🎬<div class="video-play">▶</div></div><div class="video-info"><div class="video-title">From Zero to Production: Full-Stack Next.js in 2025</div><div class="video-meta">1h 05min · 21k views</div></div></div>
-    <div class="video-card"><div class="video-thumb" style="background:linear-gradient(135deg,#1a1200,#3a2d00)">🎬<div class="video-play">▶</div></div><div class="video-info"><div class="video-title">Optimizing PostgreSQL Queries — 10× Faster in an Hour</div><div class="video-meta">35 min · 15k views</div></div></div>
   </div>
   <div class="social-footer"><span class="sf-label">Connect</span><a class="sf-btn" href="https://github.com/Nogueira-12" target="_blank">⊕ GitHub</a><a class="sf-btn" href="https://www.linkedin.com/in/tomás-nogueira-33b347402/" target="_blank">⊕ LinkedIn</a><a class="sf-btn" href="https://www.instagram.com/nogueira.__.12/" target="_blank">⊕ Instagram</a></div>
 </div>
