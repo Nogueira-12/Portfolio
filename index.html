@@ -491,19 +491,55 @@ textarea.form-input { resize: vertical; min-height: 105px; }
 .noise { position: fixed; inset: 0; pointer-events: none; z-index: 2; opacity: 0.02; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 150px 150px; }
 
 /* ══════════════════════════════
-   RESPONSIVE — MOBILE / TABLET
+   RESPONSIVE — DESKTOP / TABLET / MOBILE
+   Goal: nothing ever overflows the screen at any width.
 ══════════════════════════════ */
-@media (max-width: 860px) {
+
+/* Global guard against accidental horizontal overflow */
+.layout, .main, .page { max-width: 100%; }
+.main { min-width: 0; }
+
+/* ── Narrow desktop & tablet (sidebar stays, inner multi-column blocks relax) ──
+   Below ~1100px the sidebar (≈308px) leaves too little room for the wide stats
+   bar and the 2-column grids, so we stack them before they can overflow. */
+@media (max-width: 1100px) {
+  .hero-stats-bar { flex-wrap: wrap; padding: 1rem; gap: 0; align-items: stretch; }
+  .hst {
+    flex: 1 1 30%; min-width: 0;
+    padding: 0.5rem 0.2rem; padding-right: 0 !important;
+    text-align: center; align-items: center;
+  }
+  .hst-n { font-size: 1.5rem; }
+  .hst-sep { display: none; }
+  .hst-bio {
+    flex: 0 0 100%; max-width: 100%;
+    padding: 0.8rem 0 0; margin-top: 0.4rem;
+    border-top: 1px solid var(--border); font-size: 0.82rem;
+  }
+  .hst-actions {
+    display: flex; flex: 0 0 100%; margin-left: 0;
+    flex-direction: row; gap: 8px;
+    padding-top: 0.7rem; border-top: 1px solid var(--border);
+  }
+  .hst-actions .btn-primary,
+  .hst-actions .btn-outline { flex: 1; justify-content: center; }
+
+  .cv-body        { grid-template-columns: 1fr; gap: 2rem; }
+  .projects-grid  { grid-template-columns: 1fr; }
+  .about-layout   { grid-template-columns: 1fr; }
+  .contact-layout { grid-template-columns: 1fr; }
+}
+
+/* ── Mobile: off-canvas sidebar + full-width content ── */
+@media (max-width: 900px) {
   /* Show mobile topbar */
   .mobile-topbar { display: flex; }
 
   /* Sidebar becomes off-canvas overlay — hidden until hamburger clicked */
   .sidebar {
     position: fixed;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: var(--sidebar-w);
+    left: 0; top: 0; bottom: 0;
+    width: var(--sidebar-w); max-width: 86vw;
     border-radius: 0 var(--radius-sidebar) var(--radius-sidebar) 0;
     transform: translateX(-110%);
     transition: transform 0.32s cubic-bezier(0.4, 0, 0.2, 1);
@@ -535,51 +571,20 @@ textarea.form-input { resize: vertical; min-height: 105px; }
     letter-spacing: -0.05em;
   }
   .name-sub-muted, .name-sub-italic { font-size: clamp(0.82rem, 3.2vw, 1.2rem); }
-  .hero-name-row-2 { gap: 0.4rem; margin-top: 0.4rem; }
+  .hero-name-row-2 { gap: 0.4rem; margin-top: 0.4rem; flex-wrap: wrap; }
 
   /* Hero topbar stacks */
   .hero-topbar { flex-direction: column; align-items: flex-start; gap: 0.5rem; margin-bottom: 1.5rem; }
+  .avail-pill { font-size: 0.7rem; }
 
-  /* Stats bar: 3-column number grid, then bio + actions below */
-  .hero-stats-bar {
-    flex-wrap: wrap; padding: 1rem; gap: 0; align-items: stretch;
-  }
-  .hst {
-    flex: 1 1 30%;
-    padding: 0.5rem 0.2rem;
-    text-align: center; align-items: center;
-    padding-right: 0 !important;
-  }
   .hst-n { font-size: 1.4rem; }
-  .hst-sep { display: none; }
-  .hst-bio {
-    flex: 0 0 100%; max-width: 100%;
-    padding: 0.8rem 0 0; margin-top: 0.4rem;
-    border-top: 1px solid var(--border);
-    font-size: 0.8rem;
-  }
-  .hst-actions {
-    display: flex; flex: 0 0 100%; margin-left: 0;
-    flex-direction: row; gap: 8px;
-    padding-top: 0.7rem; border-top: 1px solid var(--border);
-  }
-  .hst-actions .btn-primary,
-  .hst-actions .btn-outline { flex: 1; justify-content: center; font-size: 0.8rem; }
 
   /* Trusted carousel */
   .trusted-section { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
   .carousel-track-wrap { width: 100%; }
 
-  /* CV stacks */
-  .cv-body { grid-template-columns: 1fr; gap: 2rem; }
-
   /* Scroll project cards: wider on mobile for touch swipe */
   .proj-card { width: 72vw !important; min-width: 0 !important; max-width: none !important; }
-
-  /* All grids go single column */
-  .projects-grid  { grid-template-columns: 1fr; }
-  .about-layout   { grid-template-columns: 1fr; }
-  .contact-layout { grid-template-columns: 1fr; }
 
   .page-title { font-size: 1.5rem; }
   .about-card, .contact-card { padding: 1.3rem; }
@@ -593,6 +598,9 @@ textarea.form-input { resize: vertical; min-height: 105px; }
   .main { padding-left: 0.75rem !important; padding-right: 0.75rem !important; }
   .hero-stats-bar { padding: 0.85rem; }
   .hst-n { font-size: 1.2rem; }
+  .hst-l { font-size: 0.6rem; }
+  .name-sub-muted, .name-sub-italic { font-size: clamp(0.78rem, 4vw, 1rem); }
+  .mobile-brand { font-size: 0.82rem; }
 }
 </style>
 </head>
