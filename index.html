@@ -117,18 +117,18 @@ body::before {
 .sidebar-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.32); }
 .sidebar-name { font-family: var(--font-head); font-weight: 700; font-size: 0.98rem; color: #fff; letter-spacing: -0.01em; line-height: 1.6; padding-bottom: 4px; flex-shrink: 0; }
 .sidebar-role { font-size: 0.72rem; color: var(--muted); font-weight: 300; margin-bottom: 1.8rem; letter-spacing: 0.05em; text-transform: uppercase; flex-shrink: 0; }
-.sidebar-nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.sidebar-nav { display: flex; flex-direction: column; gap: 8px; flex: 1; justify-content: center; }
 .nav-link {
-  display: flex; align-items: center; gap: 10px;
-  padding: 15px 16px; border-radius: var(--radius-sm);
+  display: flex; align-items: center; gap: 14px;
+  padding: 20px 20px; border-radius: var(--radius-sm);
   color: var(--muted); text-decoration: none;
-  font-size: 1rem; font-weight: 400; transition: all 0.2s;
+  font-size: 1.12rem; font-weight: 400; transition: all 0.2s;
   cursor: pointer; border: 1px solid transparent; background: none;
   width: 100%; text-align: left; font-family: var(--font-body);
 }
 .nav-link:hover { color: var(--text); background: rgba(255,255,255,0.05); }
 .nav-link.active { color: #fff; background: rgba(124,92,252,0.18); border-color: rgba(124,92,252,0.32); }
-.nav-ico { width: 19px; height: 19px; opacity: 0.65; flex-shrink: 0; }
+.nav-ico { width: 24px; height: 24px; opacity: 0.65; flex-shrink: 0; }
 .sidebar-social { display: flex; gap: 6px; margin-top: auto; padding-top: 1.2rem; border-top: 1px solid var(--border); }
 .social-btn {
   width: 34px; height: 34px; border-radius: var(--radius-sm);
@@ -307,8 +307,8 @@ body::before {
 .logo-svg { opacity: 0.55; transition: opacity 0.3s; display: flex; align-items: center; gap: 9px; }
 a.logo-item { text-decoration: none; }
 .logo-item:hover .logo-svg { opacity: 1; }
-.logo-img { width: 20px; height: 20px; object-fit: contain; border-radius: 4px; flex-shrink: 0; }
-.logo-wide { height: 26px; width: auto; max-width: 168px; object-fit: contain; flex-shrink: 0; display: block; }
+.logo-img { width: 26px; height: 26px; object-fit: contain; border-radius: 4px; flex-shrink: 0; }
+.logo-wide { height: 36px; width: auto; max-width: 220px; object-fit: contain; flex-shrink: 0; display: block; }
 .logo-invert { filter: brightness(0) invert(1); }
 .logo-wordmark { font-family: var(--font-head); font-size: 0.8rem; font-weight: 700; color: #fff; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
 
