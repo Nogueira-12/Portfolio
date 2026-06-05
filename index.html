@@ -304,8 +304,10 @@ body::before {
   padding: 0 2.2rem; flex-shrink: 0; height: 46px;
   border-right: 1px solid var(--border);
 }
-.logo-svg { opacity: 0.26; transition: opacity 0.3s; display: flex; align-items: center; gap: 8px; cursor: default; }
-.logo-svg:hover { opacity: 0.6; }
+.logo-svg { opacity: 0.55; transition: opacity 0.3s; display: flex; align-items: center; gap: 9px; }
+a.logo-item { text-decoration: none; }
+.logo-item:hover .logo-svg { opacity: 1; }
+.logo-img { width: 20px; height: 20px; object-fit: contain; border-radius: 4px; flex-shrink: 0; }
 .logo-wordmark { font-family: var(--font-head); font-size: 0.8rem; font-weight: 700; color: #fff; letter-spacing: 0.04em; text-transform: uppercase; white-space: nowrap; }
 
 /* ══ CV SECTION ══ */
@@ -488,27 +490,12 @@ textarea.form-input { resize: vertical; min-height: 105px; }
 .form-status { display: none; margin-top: 0.9rem; padding: 10px 13px; border-radius: var(--radius-sm); font-size: 0.82rem; line-height: 1.5; }
 .form-status-ok  { display: block; background: rgba(0,229,192,0.1); border: 1px solid rgba(0,229,192,0.3); color: #3de8cd; }
 .form-status-err { display: block; background: rgba(255,107,172,0.1); border: 1px solid rgba(255,107,172,0.3); color: #ff8fc4; }
-.recaptcha-wrap {
-  margin-bottom: 1.1rem; padding: 14px;
-  background: var(--surface2); border: 1px solid var(--border);
-  border-radius: var(--radius-sm);
-  display: flex; flex-direction: column; align-items: flex-start; gap: 11px;
-  overflow: hidden; transition: border-color 0.2s;
-}
-.recaptcha-wrap:hover { border-color: var(--border-hover); }
-.recaptcha-label {
-  display: flex; align-items: center; gap: 8px;
-  font-size: 0.7rem; color: var(--muted);
-  text-transform: uppercase; letter-spacing: 0.07em;
-}
-.recaptcha-label::before {
-  content: ''; width: 6px; height: 6px; border-radius: 50%;
-  background: var(--accent3); box-shadow: 0 0 8px var(--accent3);
-}
-.recaptcha-wrap:has(#recaptchaBox:empty) { display: none; }
-@media (max-width: 460px) {
-  #recaptchaBox { transform: scale(0.85); transform-origin: left top; height: 66px; }
-}
+/* reCAPTCHA invisivel: escondemos o selo (permitido por mostrarmos o credito em texto) */
+.grecaptcha-badge { visibility: hidden; }
+#recaptchaBox { display: none; }
+.recaptcha-terms { margin-top: 12px; font-size: 0.68rem; line-height: 1.5; color: var(--muted); }
+.recaptcha-terms a { color: var(--accent); text-decoration: none; }
+.recaptcha-terms a:hover { text-decoration: underline; }
 
 /* scrollbar */
 ::-webkit-scrollbar { width: 4px; }
@@ -778,17 +765,17 @@ textarea.form-input { resize: vertical; min-height: 105px; }
     <span class="trusted-lbl">Trusted by</span>
     <div class="carousel-track-wrap">
       <div class="carousel-track">
-        <div class="logo-item"><div class="logo-svg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="1" fill="white"/><rect x="13" y="3" width="8" height="8" rx="1" fill="white" opacity=".5"/><rect x="3" y="13" width="8" height="8" rx="1" fill="white" opacity=".5"/><rect x="13" y="13" width="8" height="8" rx="1" fill="white"/></svg><span class="logo-wordmark">Esc. Secundária da Maia</span></div></div>
-        <div class="logo-item"><div class="logo-svg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><polygon points="12,2 22,20 2,20" fill="white"/></svg><span class="logo-wordmark">Gigatel - Serviços de Informática</span></div></div>
-        <div class="logo-item"><div class="logo-svg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="white"/></svg><span class="logo-wordmark">iS - Intelligent Solutions</span></div></div>
-        <div class="logo-item"><div class="logo-svg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M2 12h20M12 2c-4 4-4 12 0 20M12 2c4 4 4 12 0 20" stroke="white" stroke-width="1.8"/></svg><span class="logo-wordmark">Semanto - Agenzia di Comunicazione</span></div></div>
-        <div class="logo-item"><div class="logo-svg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/><path d="M8 12l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg><span class="logo-wordmark">Scuola Edile Arezzo</span></div></div>
+        <a class="logo-item" href="https://www.aemaia.pt/index.php/agrupamento/escolas/escola-secundaria-da-maia" target="_blank" rel="noopener"><div class="logo-svg"><svg class="logo-img" viewBox="0 0 24 24" fill="white"><path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg><span class="logo-wordmark">Esc. Secundária da Maia</span></div></a>
+        <a class="logo-item" href="https://gigatel.com/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-img" src="https://www.google.com/s2/favicons?domain=gigatel.com&amp;sz=128" alt="" loading="lazy"><span class="logo-wordmark">Gigatel - Serviços de Informática</span></div></a>
+        <a class="logo-item" href="https://www.is-intelligentsolutions.com/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-img" src="https://www.google.com/s2/favicons?domain=is-intelligentsolutions.com&amp;sz=128" alt="" loading="lazy"><span class="logo-wordmark">iS - Intelligent Solutions</span></div></a>
+        <a class="logo-item" href="https://semanto.it/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-img" src="https://www.google.com/s2/favicons?domain=semanto.it&amp;sz=128" alt="" loading="lazy"><span class="logo-wordmark">Semanto - Agenzia di Comunicazione</span></div></a>
+        <a class="logo-item" href="https://www.scuolaedile.ar.it/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-img" src="https://www.google.com/s2/favicons?domain=scuolaedile.ar.it&amp;sz=128" alt="" loading="lazy"><span class="logo-wordmark">Scuola Edile Arezzo</span></div></a>
         <!-- duplicate for infinite scroll -->
-        <div class="logo-item"><div class="logo-svg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="8" height="8" rx="1" fill="white"/><rect x="13" y="3" width="8" height="8" rx="1" fill="white" opacity=".5"/><rect x="3" y="13" width="8" height="8" rx="1" fill="white" opacity=".5"/><rect x="13" y="13" width="8" height="8" rx="1" fill="white"/></svg><span class="logo-wordmark">Esc. Secundária da Maia</span></div></div>
-        <div class="logo-item"><div class="logo-svg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><polygon points="12,2 22,20 2,20" fill="white"/></svg><span class="logo-wordmark">Gigatel - Serviços de Informática</span></div></div>
-        <div class="logo-item"><div class="logo-svg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="white"/></svg><span class="logo-wordmark">iS - Intelligent Solutions</span></div></div>
-        <div class="logo-item"><div class="logo-svg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M2 12h20M12 2c-4 4-4 12 0 20M12 2c4 4 4 12 0 20" stroke="white" stroke-width="1.8"/></svg><span class="logo-wordmark">Semanto - Agenzia di Comunicazione</span></div></div>
-        <div class="logo-item"><div class="logo-svg"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="white" stroke-width="2"/><path d="M8 12l3 3 5-5" stroke="white" stroke-width="1.8" stroke-linecap="round"/></svg><span class="logo-wordmark">Scuola Edile Arezzo</span></div></div>
+        <a class="logo-item" href="https://www.aemaia.pt/index.php/agrupamento/escolas/escola-secundaria-da-maia" target="_blank" rel="noopener"><div class="logo-svg"><svg class="logo-img" viewBox="0 0 24 24" fill="white"><path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg><span class="logo-wordmark">Esc. Secundária da Maia</span></div></a>
+        <a class="logo-item" href="https://gigatel.com/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-img" src="https://www.google.com/s2/favicons?domain=gigatel.com&amp;sz=128" alt="" loading="lazy"><span class="logo-wordmark">Gigatel - Serviços de Informática</span></div></a>
+        <a class="logo-item" href="https://www.is-intelligentsolutions.com/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-img" src="https://www.google.com/s2/favicons?domain=is-intelligentsolutions.com&amp;sz=128" alt="" loading="lazy"><span class="logo-wordmark">iS - Intelligent Solutions</span></div></a>
+        <a class="logo-item" href="https://semanto.it/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-img" src="https://www.google.com/s2/favicons?domain=semanto.it&amp;sz=128" alt="" loading="lazy"><span class="logo-wordmark">Semanto - Agenzia di Comunicazione</span></div></a>
+        <a class="logo-item" href="https://www.scuolaedile.ar.it/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-img" src="https://www.google.com/s2/favicons?domain=scuolaedile.ar.it&amp;sz=128" alt="" loading="lazy"><span class="logo-wordmark">Scuola Edile Arezzo</span></div></a>
       </div>
     </div>
   </div>
@@ -982,8 +969,9 @@ textarea.form-input { resize: vertical; min-height: 105px; }
         <div class="form-group"><label class="form-label">Email</label><input class="form-input" type="email" name="from_email" placeholder="joao@empresa.pt" required></div>
         <div class="form-group"><label class="form-label">Subject</label><input class="form-input" type="text" name="subject" placeholder="Project inquiry..."></div>
         <div class="form-group"><label class="form-label">Message</label><textarea class="form-input" name="message" placeholder="Tell me about your project..." required></textarea></div>
-        <div class="recaptcha-wrap"><span class="recaptcha-label">Verificação de segurança</span><div id="recaptchaBox"></div></div>
         <button class="btn-primary" id="contactSubmit" type="submit" style="width:100%;justify-content:center;">Send Message →</button>
+        <div id="recaptchaBox"></div>
+        <p class="recaptcha-terms">Protegido por reCAPTCHA — aplicam-se a <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Política de Privacidade</a> e os <a href="https://policies.google.com/terms" target="_blank" rel="noopener">Termos</a> da Google.</p>
         <div class="form-status" id="contactStatus" role="status" aria-live="polite"></div>
       </form>
     </div>
@@ -1110,20 +1098,16 @@ function scrollProj(dir) {
   const SERVICE_ID         = 'service_dgogagc';
   const TEMPLATE_TO_OWNER  = 'template_bgankpl';
   const TEMPLATE_AUTOREPLY = 'template_de35efc';
-  // reCAPTCHA v2 — SITE KEY do reCAPTCHA (a SECRET KEY vai no template TEMPLATE_TO_OWNER, no painel do EmailJS).
-  const RECAPTCHA_SITE_KEY = '6LdvlA4tAAAAAMnWgcEs35whL4Rt-OOjxLWLvyuM';
-  let recaptchaWidgetId = null;
-  window.onRecaptchaLoad = function() {
-    if (!window.grecaptcha) return;
-    try {
-      recaptchaWidgetId = grecaptcha.render('recaptchaBox', { sitekey: RECAPTCHA_SITE_KEY, theme: 'dark' });
-    } catch (err) { console.error('reCAPTCHA render error:', err); }
-  };
+  // reCAPTCHA v2 INVISIVEL — cria uma chave do tipo "Invisible" e poe aqui a SITE KEY.
+  // (a SECRET KEY dessa chave vai no template TEMPLATE_TO_OWNER, no painel do EmailJS).
+  const RECAPTCHA_SITE_KEY = 'YOUR_INVISIBLE_SITE_KEY';
 
   const form = document.getElementById('contactForm');
   if (!form) return;
   const btn = document.getElementById('contactSubmit');
   const statusEl = document.getElementById('contactStatus');
+  let recaptchaWidgetId = null;
+  let pendingParams = null;
 
   function showStatus(msg, type) {
     statusEl.textContent = msg;
@@ -1132,40 +1116,29 @@ function scrollProj(dir) {
 
   if (window.emailjs) emailjs.init({ publicKey: PUBLIC_KEY });
 
-  form.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    const name    = form.from_name.value.trim();
-    const email   = form.from_email.value.trim();
-    const subject = form.subject.value.trim() || '(sem assunto)';
-    const message = form.message.value.trim();
-    if (!name || !email || !message) {
-      showStatus('Por favor preenche o nome, o email e a mensagem.', 'err');
-      return;
-    }
-    // Enviamos varios nomes de variavel (aliases) para o template funcionar
-    // independentemente das chaves usadas: {{name}}, {{email}}, {{from_name}}, etc.
-    const params = {
-      name: name, from_name: name,
-      email: email, from_email: email, reply_to: email,
-      subject: subject, title: subject,
-      message: message
-    };
-    if (!window.emailjs || PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
-      showStatus('Envio de email ainda nao configurado. Falta inserir as chaves do EmailJS.', 'err');
-      return;
-    }
-    // reCAPTCHA: so exigido no email que o Tomas recebe (o token e de uso unico).
-    if (recaptchaWidgetId !== null) {
-      const token = grecaptcha.getResponse(recaptchaWidgetId);
-      if (!token) {
-        showStatus('Por favor confirma que nao es um robo.', 'err');
-        return;
-      }
-      params['g-recaptcha-response'] = token;
-    }
-    const originalText = btn.textContent;
-    btn.disabled = true;
-    btn.textContent = 'A enviar...';
+  // Render do reCAPTCHA invisivel (chamado pela API do Google ao carregar)
+  window.onRecaptchaLoad = function() {
+    if (!window.grecaptcha || RECAPTCHA_SITE_KEY === 'YOUR_INVISIBLE_SITE_KEY') return;
+    try {
+      recaptchaWidgetId = grecaptcha.render('recaptchaBox', {
+        sitekey: RECAPTCHA_SITE_KEY,
+        size: 'invisible',
+        badge: 'bottomright',
+        callback: onRecaptchaToken
+      });
+    } catch (err) { console.error('reCAPTCHA render error:', err); }
+  };
+
+  // Chamado quando o reCAPTCHA invisivel devolve o token
+  function onRecaptchaToken(token) {
+    if (!pendingParams) return;
+    const params = pendingParams;
+    pendingParams = null;
+    params['g-recaptcha-response'] = token;
+    sendEmails(params);
+  }
+
+  async function sendEmails(params) {
     try {
       await emailjs.send(SERVICE_ID, TEMPLATE_TO_OWNER, params);
       await emailjs.send(SERVICE_ID, TEMPLATE_AUTOREPLY, params);
@@ -1176,8 +1149,40 @@ function scrollProj(dir) {
       showStatus('Ocorreu um erro ao enviar. Tenta novamente ou escreve para tomassn2008@gmail.com.', 'err');
     } finally {
       btn.disabled = false;
-      btn.textContent = originalText;
+      btn.textContent = btn.dataset.label || 'Send Message →';
       if (recaptchaWidgetId !== null) grecaptcha.reset(recaptchaWidgetId);
+    }
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name    = form.from_name.value.trim();
+    const email   = form.from_email.value.trim();
+    const subject = form.subject.value.trim() || '(sem assunto)';
+    const message = form.message.value.trim();
+    if (!name || !email || !message) {
+      showStatus('Por favor preenche o nome, o email e a mensagem.', 'err');
+      return;
+    }
+    if (!window.emailjs || PUBLIC_KEY === 'YOUR_PUBLIC_KEY') {
+      showStatus('Envio de email ainda nao configurado. Falta inserir as chaves do EmailJS.', 'err');
+      return;
+    }
+    // aliases para os templates funcionarem com varias variaveis
+    const params = {
+      name: name, from_name: name,
+      email: email, from_email: email, reply_to: email,
+      subject: subject, title: subject,
+      message: message
+    };
+    btn.dataset.label = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = 'A enviar...';
+    if (recaptchaWidgetId !== null) {
+      pendingParams = params;
+      grecaptcha.execute(recaptchaWidgetId);   // corre o desafio invisivel -> onRecaptchaToken
+    } else {
+      sendEmails(params);                       // sem reCAPTCHA configurado: envia direto
     }
   });
 })();
