@@ -117,7 +117,7 @@ body::before {
 .sidebar-avatar img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.32); }
 .sidebar-name { font-family: var(--font-head); font-weight: 700; font-size: 0.98rem; color: #fff; letter-spacing: -0.01em; line-height: 1.6; padding-bottom: 4px; flex-shrink: 0; }
 .sidebar-role { font-size: 0.72rem; color: var(--muted); font-weight: 300; margin-bottom: 1.8rem; letter-spacing: 0.05em; text-transform: uppercase; flex-shrink: 0; }
-.sidebar-nav { display: flex; flex-direction: column; gap: 8px; flex: 1; justify-content: center; }
+.sidebar-nav { display: flex; flex-direction: column; gap: 8px; flex: 1; justify-content: flex-start; }
 .nav-link {
   display: flex; align-items: center; gap: 14px;
   padding: 20px 20px; border-radius: var(--radius-sm);
@@ -694,7 +694,7 @@ textarea.form-input { resize: vertical; min-height: 105px; }
   <div class="sidebar-avatar"><img src="assets/profile_picture.jpg" alt="Tomás Nogueira"></div>
   <div class="sidebar-name">Tomás Nogueira</div>
   <div class="sidebar-role">Full-Stack Developer</div>
-  <nav class="sidebar-nav" style="margin-top: 2.4rem;">
+  <nav class="sidebar-nav" style="margin-top: 5rem;">
     <button class="nav-link active" onclick="nav('home',this)">
       <svg class="nav-ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 9.5L12 3l9 6.5V21H3z"/><rect x="9" y="14" width="6" height="7"/></svg>Home
     </button>
@@ -767,16 +767,16 @@ textarea.form-input { resize: vertical; min-height: 105px; }
     <span class="trusted-lbl">Trusted by</span>
     <div class="carousel-track-wrap">
       <div class="carousel-track">
-        <a class="logo-item" href="https://www.aemaia.pt/index.php/agrupamento/escolas/escola-secundaria-da-maia" target="_blank" rel="noopener"><div class="logo-svg"><svg class="logo-img" viewBox="0 0 24 24" fill="white"><path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg><span class="logo-wordmark">Esc. Secundária da Maia</span></div></a>
-        <a class="logo-item" href="https://gigatel.com/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-img" src="https://www.google.com/s2/favicons?domain=gigatel.com&amp;sz=128" alt="" loading="lazy"><span class="logo-wordmark">Gigatel - Serviços de Informática</span></div></a>
-        <a class="logo-item" href="https://www.is-intelligentsolutions.com/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-img" src="https://www.google.com/s2/favicons?domain=is-intelligentsolutions.com&amp;sz=128" alt="" loading="lazy"><span class="logo-wordmark">iS - Intelligent Solutions</span></div></a>
-        <a class="logo-item" href="https://semanto.it/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-img" src="https://www.google.com/s2/favicons?domain=semanto.it&amp;sz=128" alt="" loading="lazy"><span class="logo-wordmark">Semanto - Agenzia di Comunicazione</span></div></a>
+        <a class="logo-item" href="https://www.aemaia.pt/index.php/agrupamento/escolas/escola-secundaria-da-maia" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide logo-invert" src="assets/LogoAEMAIA.svg" alt="Agrupamento de Escolas da Maia"></div></a>
+        <a class="logo-item" href="https://gigatel.com/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide" src="assets/gigatel-logo.png" alt="Gigatel"></div></a>
+        <a class="logo-item" href="https://www.is-intelligentsolutions.com/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide logo-invert" src="assets/is-logo.svg" alt="iS - Intelligent Solutions"></div></a>
+        <a class="logo-item" href="https://semanto.it/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide" src="assets/LOGO-SEMANTO-white-sx.png" alt="Semanto"></div></a>
         <a class="logo-item" href="https://www.scuolaedile.ar.it/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide logo-invert" src="assets/scuola-edile.svg" alt="Scuola Edile"></div></a>
         <!-- duplicate for infinite scroll -->
-        <a class="logo-item" href="https://www.aemaia.pt/index.php/agrupamento/escolas/escola-secundaria-da-maia" target="_blank" rel="noopener"><div class="logo-svg"><svg class="logo-img" viewBox="0 0 24 24" fill="white"><path d="M12 3 1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg><span class="logo-wordmark">Esc. Secundária da Maia</span></div></a>
-        <a class="logo-item" href="https://gigatel.com/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-img" src="https://www.google.com/s2/favicons?domain=gigatel.com&amp;sz=128" alt="" loading="lazy"><span class="logo-wordmark">Gigatel - Serviços de Informática</span></div></a>
-        <a class="logo-item" href="https://www.is-intelligentsolutions.com/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-img" src="https://www.google.com/s2/favicons?domain=is-intelligentsolutions.com&amp;sz=128" alt="" loading="lazy"><span class="logo-wordmark">iS - Intelligent Solutions</span></div></a>
-        <a class="logo-item" href="https://semanto.it/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-img" src="https://www.google.com/s2/favicons?domain=semanto.it&amp;sz=128" alt="" loading="lazy"><span class="logo-wordmark">Semanto - Agenzia di Comunicazione</span></div></a>
+        <a class="logo-item" href="https://www.aemaia.pt/index.php/agrupamento/escolas/escola-secundaria-da-maia" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide logo-invert" src="assets/LogoAEMAIA.svg" alt="Agrupamento de Escolas da Maia"></div></a>
+        <a class="logo-item" href="https://gigatel.com/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide" src="assets/gigatel-logo.png" alt="Gigatel"></div></a>
+        <a class="logo-item" href="https://www.is-intelligentsolutions.com/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide logo-invert" src="assets/is-logo.svg" alt="iS - Intelligent Solutions"></div></a>
+        <a class="logo-item" href="https://semanto.it/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide" src="assets/LOGO-SEMANTO-white-sx.png" alt="Semanto"></div></a>
         <a class="logo-item" href="https://www.scuolaedile.ar.it/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide logo-invert" src="assets/scuola-edile.svg" alt="Scuola Edile"></div></a>
       </div>
     </div>
