@@ -307,6 +307,7 @@ body::before {
 .logo-svg { opacity: 0.55; transition: opacity 0.3s; display: flex; align-items: center; gap: 9px; }
 a.logo-item { text-decoration: none; }
 .logo-item:hover .logo-svg { opacity: 1; }
+.logo-svg-bright { opacity: 0.8; }
 .logo-img { width: 26px; height: 26px; object-fit: contain; border-radius: 4px; flex-shrink: 0; }
 .logo-wide { height: 36px; width: auto; max-width: 220px; object-fit: contain; flex-shrink: 0; display: block; }
 .logo-invert { filter: brightness(0) invert(1); }
@@ -691,7 +692,7 @@ textarea.form-input { resize: vertical; min-height: 105px; }
 <!-- ══ FLOATING SIDEBAR ══ -->
 <aside class="sidebar" style="align-items: center;" id="sidebar">
   <button class="sidebar-close" onclick="closeMobileMenu()">✕</button>
-  <div class="sidebar-avatar"><img src="assets/profile_picture.jpg" alt="Tomás Nogueira"></div>
+  <div class="sidebar-avatar"><img src="assets/profile_picture.jpg" alt="Tomás Nogueira" class="opacity-70"></div>
   <div class="sidebar-name">Tomás Nogueira</div>
   <div class="sidebar-role">Full-Stack Developer</div>
   <nav class="sidebar-nav" style="margin-top: 5rem;">
@@ -767,13 +768,13 @@ textarea.form-input { resize: vertical; min-height: 105px; }
     <span class="trusted-lbl">Trusted by</span>
     <div class="carousel-track-wrap">
       <div class="carousel-track">
-        <a class="logo-item" href="https://www.aemaia.pt/index.php/agrupamento/escolas/escola-secundaria-da-maia" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide logo-invert" src="assets/LogoAEMAIA.svg" alt="Agrupamento de Escolas da Maia"></div></a>
+        <a class="logo-item" href="https://www.aemaia.pt/index.php/agrupamento/escolas/escola-secundaria-da-maia" target="_blank" rel="noopener"><div class="logo-svg logo-svg-bright"><img class="logo-wide" src="assets/LogoAEMAIA.svg" alt="Agrupamento de Escolas da Maia"></div></a>
         <a class="logo-item" href="https://gigatel.com/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide" src="assets/gigatel-logo.png" alt="Gigatel"></div></a>
         <a class="logo-item" href="https://www.is-intelligentsolutions.com/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide logo-invert" src="assets/is-logo.svg" alt="iS - Intelligent Solutions"></div></a>
         <a class="logo-item" href="https://semanto.it/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide" src="assets/LOGO-SEMANTO-white-sx.png" alt="Semanto"></div></a>
         <a class="logo-item" href="https://www.scuolaedile.ar.it/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide logo-invert" src="assets/scuola-edile.svg" alt="Scuola Edile"></div></a>
         <!-- duplicate for infinite scroll -->
-        <a class="logo-item" href="https://www.aemaia.pt/index.php/agrupamento/escolas/escola-secundaria-da-maia" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide logo-invert" src="assets/LogoAEMAIA.svg" alt="Agrupamento de Escolas da Maia"></div></a>
+        <a class="logo-item" href="https://www.aemaia.pt/index.php/agrupamento/escolas/escola-secundaria-da-maia" target="_blank" rel="noopener"><div class="logo-svg logo-svg-bright"><img class="logo-wide" src="assets/LogoAEMAIA.svg" alt="Agrupamento de Escolas da Maia"></div></a>
         <a class="logo-item" href="https://gigatel.com/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide" src="assets/gigatel-logo.png" alt="Gigatel"></div></a>
         <a class="logo-item" href="https://www.is-intelligentsolutions.com/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide logo-invert" src="assets/is-logo.svg" alt="iS - Intelligent Solutions"></div></a>
         <a class="logo-item" href="https://semanto.it/" target="_blank" rel="noopener"><div class="logo-svg"><img class="logo-wide" src="assets/LOGO-SEMANTO-white-sx.png" alt="Semanto"></div></a>
