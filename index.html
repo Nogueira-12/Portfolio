@@ -426,6 +426,24 @@ a.logo-item { text-decoration: none; }
   font-size: 0.72rem; color: rgba(255,255,255,0.45);
 }
 .proj-info { padding: 11px 14px; }
+
+/* ── "Em desenvolvimento" cover (loading) ── */
+.dev-badge {
+  display: flex; flex-direction: column; align-items: center; gap: 9px;
+  text-align: center; padding: 0 14px; width: 100%;
+}
+.dev-spinner {
+  width: 30px; height: 30px; border-radius: 50%;
+  border: 3px solid rgba(255,255,255,0.16);
+  border-top-color: var(--accent2);
+  animation: devspin 0.9s linear infinite;
+}
+@keyframes devspin { to { transform: rotate(360deg); } }
+.dev-title {
+  font-family: var(--font-head); font-size: 0.8rem; font-weight: 700;
+  color: #fff; letter-spacing: 0.05em; text-transform: uppercase;
+}
+.dev-sub { font-size: 0.66rem; color: rgba(255,255,255,0.62); line-height: 1.4; }
 .proj-name { font-family: var(--font-head); font-size: 0.86rem; font-weight: 700; color: var(--text); margin-bottom: 5px; }
 .proj-tags { display: flex; gap: 4px; flex-wrap: wrap; }
 
@@ -877,7 +895,7 @@ textarea.form-input { resize: vertical; min-height: 105px; }
     <div class="proj-scroll-viewport">
       <div class="proj-track" id="projTrack">
         <a class="proj-card" href="https://youtu.be/CwC7mgQaUEw" target="_blank" rel="noopener"><div class="proj-cover" style="background:#1a0a2e url('https://img.youtube.com/vi/CwC7mgQaUEw/sddefault.jpg') center/cover no-repeat"></div><div class="proj-info"><div class="proj-name">SportX Club Management</div><div class="proj-tags"><span class="tag tag-pink">Ruby on Rails</span><span class="tag tag-purple">PostgreSQL</span><span class="tag tag-amber">HTML</span></div></div></a>
-        <a class="proj-card" href="#" onclick="openProjectModal('scuolaEdile'); return false;"><div class="proj-cover" style="background:linear-gradient(135deg,#1a0d1a,#3d1440)">🎨</div><div class="proj-info"><div class="proj-name">Scuola Edile Website</div><div class="proj-tags"><span class="tag tag-pink">HTML/CSS</span><span class="tag tag-amber">Responsive</span></div></div></a>
+        <a class="proj-card" href="#" onclick="openProjectModal('scuolaEdile'); return false;"><div class="proj-cover" style="background:linear-gradient(135deg,#1a0d1a,#3d1440)"><div class="dev-badge"><span class="dev-spinner"></span><span class="dev-title">Em desenvolvimento</span><span class="dev-sub">Brevemente disponível</span></div></div><div class="proj-info"><div class="proj-name">Scuola Edile Website</div><div class="proj-tags"><span class="tag tag-amber">HTML</span><span class="tag tag-pink">CSS</span><span class="tag tag-purple">JS</span></div></div></a>
       </div>
     </div>
 
@@ -900,7 +918,7 @@ textarea.form-input { resize: vertical; min-height: 105px; }
   <p class="page-subtitle">A collection of my work in full-stack web development, database design, and software architecture.</p>
   <div class="projects-grid">
     <a class="project-card" href="https://youtu.be/CwC7mgQaUEw" target="_blank" rel="noopener"><div class="project-card-cover" style="background:#1a0a2e url('https://img.youtube.com/vi/CwC7mgQaUEw/sddefault.jpg') center/cover no-repeat"></div><div class="project-card-body"><div class="project-card-name">SportX Club Management</div><p class="project-card-desc">Full-stack capstone project (PAP) graded 20/20. Complete club management system with member roles, practice scheduling, finances, and integrated social network with posts and interactions.</p><div class="project-card-tags"><span class="tag tag-pink">Ruby on Rails</span><span class="tag tag-purple">PostgreSQL</span><span class="tag tag-amber">HTML</span><span class="tag tag-teal">WSL (Ubuntu)</span><span class="tag">GitHub</span></div></div></a>
-    <a class="project-card" href="#" onclick="openProjectModal('scuolaEdile'); return false;"><div class="project-card-cover" style="background:linear-gradient(135deg,#1a0d1a,#3d1440)">🎨</div><div class="project-card-body"><div class="project-card-name">Scuola Edile Website Redesign</div><p class="project-card-desc">Ongoing ERASMUS project redesigning official website for Italian construction training institution. Modern responsive layout with training course listings, safety portal, and efficient participant registration.</p><div class="project-card-tags"><span class="tag tag-pink">HTML/CSS</span><span class="tag tag-amber">Responsive</span><span class="tag tag-teal">Accessibility</span></div></div></a>
+    <a class="project-card" href="#" onclick="openProjectModal('scuolaEdile'); return false;"><div class="project-card-cover" style="background:linear-gradient(135deg,#1a0d1a,#3d1440)"><div class="dev-badge"><span class="dev-spinner"></span><span class="dev-title">Em desenvolvimento</span><span class="dev-sub">Brevemente será apresentado</span></div></div><div class="project-card-body"><div class="project-card-name">Scuola Edile Website Redesign</div><p class="project-card-desc">Ongoing ERASMUS project redesigning official website for Italian construction training institution. Modern responsive layout with training course listings, safety portal, and efficient participant registration.</p><div class="project-card-tags"><span class="tag tag-amber">HTML</span><span class="tag tag-pink">CSS</span><span class="tag tag-purple">JS</span><span class="tag tag-teal">PHP</span><span class="tag">WordPress</span></div></div></a>
   </div>
   <div class="social-footer">
     <a class="sf-btn" href="https://github.com/Nogueira-12" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M16,2.345c7.735,0,14,6.265,14,14-.002,6.015-3.839,11.359-9.537,13.282-.7,.14-.963-.298-.963-.665,0-.473,.018-1.978,.018-3.85,0-1.312-.437-2.152-.945-2.59,3.115-.35,6.388-1.54,6.388-6.912,0-1.54-.543-2.783-1.435-3.762,.14-.35,.63-1.785-.14-3.71,0,0-1.173-.385-3.85,1.435-1.12-.315-2.31-.472-3.5-.472s-2.38,.157-3.5,.472c-2.677-1.802-3.85-1.435-3.85-1.435-.77,1.925-.28,3.36-.14,3.71-.892,.98-1.435,2.24-1.435,3.762,0,5.355,3.255,6.563,6.37,6.913-.403,.35-.77,.963-.893,1.872-.805,.368-2.818,.963-4.077-1.155-.263-.42-1.05-1.452-2.152-1.435-1.173,.018-.472,.665,.017,.927,.595,.332,1.277,1.575,1.435,1.978,.28,.787,1.19,2.293,4.707,1.645,0,1.173,.018,2.275,.018,2.607,0,.368-.263,.787-.963,.665-5.719-1.904-9.576-7.255-9.573-13.283,0-7.735,6.265-14,14-14Z"/></svg> GitHub</a>
@@ -1021,8 +1039,8 @@ const PROJECTS = {
     title: "Scuola Edile — Website Redesign",
     status: "In Development · ERASMUS Internship (Italy)",
     cover: "linear-gradient(135deg,#1a0d1a,#3d1440)",
-    emoji: "🎨",
-    tags: [["tag-pink","HTML/CSS"],["tag-amber","Responsive"],["tag-teal","Accessibility"]],
+    coverHtml: '<div class="dev-badge"><span class="dev-spinner"></span><span class="dev-title">Em desenvolvimento</span><span class="dev-sub">Brevemente será apresentado</span></div>',
+    tags: [["tag-amber","HTML"],["tag-pink","CSS"],["tag-purple","JS"],["tag-teal","PHP"],["tag","WordPress"]],
     desc: [
       "Redesign of the official website for <strong>Scuola Edile — Centro per la Formazione e Sicurezza in Edilizia</strong>, an Italian construction training and safety institution. Developed during an <strong>ERASMUS internship</strong> at Semanto (Agenzia di Comunicazione), in Italy.",
       "The new site features a modern, fully responsive layout with a training course catalogue, a safety &amp; certification portal, and a streamlined participant registration flow — built with an accessibility-first approach.",
@@ -1036,7 +1054,7 @@ function openProjectModal(key) {
   if (!p) return;
   const cover = document.getElementById('pmCover');
   cover.style.background = p.cover || 'var(--surface2)';
-  cover.textContent = p.emoji || '';
+  cover.innerHTML = p.coverHtml || '';
   document.getElementById('pmStatus').innerHTML = p.status ? '<span class="pm-dot"></span>' + p.status : '';
   document.getElementById('pmStatus').style.display = p.status ? 'inline-flex' : 'none';
   document.getElementById('pmTitle').textContent = p.title || '';
