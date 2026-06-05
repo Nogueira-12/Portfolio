@@ -1,0 +1,9 @@
+# Ficheiros de vídeo (demasiado grandes para o GitHub — limite 100 MB)
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# Sistema
+Thumbs.db
+.DS_Store
