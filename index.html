@@ -492,6 +492,51 @@ textarea.form-input { resize: vertical; min-height: 105px; }
 /* noise grain */
 .noise { position: fixed; inset: 0; pointer-events: none; z-index: 2; opacity: 0.02; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); background-repeat: repeat; background-size: 150px 150px; }
 
+/* ══ PROJECT DETAIL MODAL ══ */
+.project-modal-overlay {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(5,5,12,0.78);
+  backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem;
+  opacity: 0; pointer-events: none; transition: opacity 0.25s;
+}
+.project-modal-overlay.open { opacity: 1; pointer-events: auto; }
+.project-modal {
+  width: 100%; max-width: 560px; max-height: 88vh; overflow-y: auto;
+  background: var(--surface); border: 1px solid var(--border-hover);
+  border-radius: var(--radius); position: relative;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.6), 0 0 40px rgba(124,92,252,0.15);
+  transform: translateY(14px) scale(0.98); transition: transform 0.25s;
+}
+.project-modal-overlay.open .project-modal { transform: translateY(0) scale(1); }
+.project-modal-close {
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  width: 32px; height: 32px; border-radius: 8px;
+  border: 1px solid var(--border); background: rgba(0,0,0,0.4);
+  color: var(--text); cursor: pointer; font-size: 0.85rem;
+  display: flex; align-items: center; justify-content: center; transition: all 0.2s;
+}
+.project-modal-close:hover { border-color: var(--accent); color: var(--accent); }
+.project-modal-cover {
+  height: 170px; display: flex; align-items: center; justify-content: center;
+  font-size: 3rem; border-radius: var(--radius) var(--radius) 0 0;
+}
+.project-modal-body { padding: 1.6rem 1.8rem 1.9rem; }
+.project-modal-status {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.08em;
+  color: #ffc26b; background: rgba(255,194,107,0.1);
+  border: 1px solid rgba(255,194,107,0.25); padding: 4px 11px; border-radius: 50px;
+  margin-bottom: 0.95rem;
+}
+.pm-dot { width: 7px; height: 7px; border-radius: 50%; background: #ffc26b; box-shadow: 0 0 8px #ffc26b; flex-shrink: 0; animation: blink 2.2s ease-in-out infinite; }
+.project-modal-title { font-family: var(--font-head); font-size: 1.45rem; font-weight: 800; color: #fff; letter-spacing: -0.02em; margin-bottom: 0.85rem; line-height: 1.2; }
+.project-modal-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 1.25rem; }
+.project-modal-desc p { font-size: 0.88rem; color: var(--muted); line-height: 1.75; margin-bottom: 0.9rem; }
+.project-modal-desc p:last-child { margin-bottom: 0; }
+.project-modal-desc strong { color: var(--text); font-weight: 600; }
+
 /* ══════════════════════════════
    RESPONSIVE — DESKTOP / TABLET / MOBILE
    Goal: nothing ever overflows the screen at any width.
@@ -796,7 +841,7 @@ textarea.form-input { resize: vertical; min-height: 105px; }
     </div>
   </div>
 
-  <!-- 5 project cards — 3 visible, scroll to see 4th and 5th, button for full page -->
+  <!-- Featured projects: SportX (opens video) + Scuola Edile (opens detail modal) -->
   <div class="projects-scroll-section">
     <div class="section-header">
       <div class="section-title">Featured Projects</div>
@@ -809,10 +854,7 @@ textarea.form-input { resize: vertical; min-height: 105px; }
     <div class="proj-scroll-viewport">
       <div class="proj-track" id="projTrack">
         <a class="proj-card" href="https://youtu.be/CwC7mgQaUEw" target="_blank" rel="noopener"><div class="proj-cover" style="background:#1a0a2e url('https://img.youtube.com/vi/CwC7mgQaUEw/sddefault.jpg') center/cover no-repeat"></div><div class="proj-info"><div class="proj-name">SportX Club Management</div><div class="proj-tags"><span class="tag tag-pink">Ruby on Rails</span><span class="tag tag-purple">PostgreSQL</span><span class="tag tag-amber">HTML</span></div></div></a>
-        <a class="proj-card" href="#"><div class="proj-cover" style="background:linear-gradient(135deg,#1a0d1a,#3d1440)">🎨</div><div class="proj-info"><div class="proj-name">Scuola Edile Website</div><div class="proj-tags"><span class="tag tag-pink">HTML/CSS</span><span class="tag tag-amber">Responsive</span></div></div></a>
-        <a class="proj-card" href="#"><div class="proj-cover" style="background:linear-gradient(135deg,#0a1a1a,#0d3d3a)">🔐</div><div class="proj-info"><div class="proj-name">Role-Based Access System</div><div class="proj-tags"><span class="tag tag-teal">Security</span><span class="tag tag-purple">PostgreSQL</span></div></div></a>
-        <a class="proj-card" href="#"><div class="proj-cover" style="background:linear-gradient(135deg,#1a1200,#3a2d00)">📊</div><div class="proj-info"><div class="proj-name">Analytics Dashboard</div><div class="proj-tags"><span class="tag tag-amber">PHP</span><span class="tag tag-pink">Data Viz</span></div></div></a>
-        <a class="proj-card" href="#"><div class="proj-cover" style="background:linear-gradient(135deg,#001a10,#003d2a)">🌐</div><div class="proj-info"><div class="proj-name">Social Network Module</div><div class="proj-tags"><span class="tag tag-teal">Ruby Rails</span><span class="tag tag-purple">Real-time</span></div></div></a>
+        <a class="proj-card" href="#" onclick="openProjectModal('scuolaEdile'); return false;"><div class="proj-cover" style="background:linear-gradient(135deg,#1a0d1a,#3d1440)">🎨</div><div class="proj-info"><div class="proj-name">Scuola Edile Website</div><div class="proj-tags"><span class="tag tag-pink">HTML/CSS</span><span class="tag tag-amber">Responsive</span></div></div></a>
       </div>
     </div>
 
@@ -822,7 +864,6 @@ textarea.form-input { resize: vertical; min-height: 105px; }
   </div>
 
   <div class="social-footer">
-    <span class="sf-label">Connect</span>
     <a class="sf-btn" href="https://github.com/Nogueira-12" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M16,2.345c7.735,0,14,6.265,14,14-.002,6.015-3.839,11.359-9.537,13.282-.7,.14-.963-.298-.963-.665,0-.473,.018-1.978,.018-3.85,0-1.312-.437-2.152-.945-2.59,3.115-.35,6.388-1.54,6.388-6.912,0-1.54-.543-2.783-1.435-3.762,.14-.35,.63-1.785-.14-3.71,0,0-1.173-.385-3.85,1.435-1.12-.315-2.31-.472-3.5-.472s-2.38,.157-3.5,.472c-2.677-1.802-3.85-1.435-3.85-1.435-.77,1.925-.28,3.36-.14,3.71-.892,.98-1.435,2.24-1.435,3.762,0,5.355,3.255,6.563,6.37,6.913-.403,.35-.77,.963-.893,1.872-.805,.368-2.818,.963-4.077-1.155-.263-.42-1.05-1.452-2.152-1.435-1.173,.018-.472,.665,.017,.927,.595,.332,1.277,1.575,1.435,1.978,.28,.787,1.19,2.293,4.707,1.645,0,1.173,.018,2.275,.018,2.607,0,.368-.263,.787-.963,.665-5.719-1.904-9.576-7.255-9.573-13.283,0-7.735,6.265-14,14-14Z"/></svg> GitHub</a>
     <a class="sf-btn" href="https://www.linkedin.com/in/tomás-nogueira-33b347402/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M26.111,3H5.889c-1.595,0-2.889,1.293-2.889,2.889V26.111c0,1.595,1.293,2.889,2.889,2.889H26.111c1.595,0,2.889-1.293,2.889-2.889V5.889c0-1.595-1.293-2.889-2.889-2.889ZM10.861,25.389h-3.877V12.87h3.877v12.519Zm-1.957-14.158c-1.267,0-2.293-1.034-2.293-2.31s1.026-2.31,2.293-2.31,2.292,1.034,2.292,2.31-1.026,2.31-2.292,2.31Zm16.485,14.158h-3.858v-6.571c0-1.802-.685-2.809-2.111-2.809-1.551,0-2.362,1.048-2.362,2.809v6.571h-3.718V12.87h3.718v1.686s1.118-2.069,3.775-2.069,4.556,1.621,4.556,4.975v7.926Z" fill-rule="evenodd"/></svg> LinkedIn</a>
     <a class="sf-btn" href="https://www.instagram.com/nogueira.__.12/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M10.202,2.098c-1.49,.07-2.507,.308-3.396,.657-.92,.359-1.7,.84-2.477,1.619-.776,.779-1.254,1.56-1.61,2.481-.345,.891-.578,1.909-.644,3.4-.066,1.49-.08,1.97-.073,5.771s.024,4.278,.096,5.772c.071,1.489,.308,2.506,.657,3.396,.359,.92,.84,1.7,1.619,2.477,.779,.776,1.559,1.253,2.483,1.61,.89,.344,1.909,.579,3.399,.644,1.49,.065,1.97,.08,5.771,.073,3.801-.007,4.279-.024,5.773-.095s2.505-.309,3.395-.657c.92-.36,1.701-.84,2.477-1.62s1.254-1.561,1.609-2.483c.345-.89,.579-1.909,.644-3.398,.065-1.494,.081-1.971,.073-5.773s-.024-4.278-.095-5.771-.308-2.507-.657-3.397c-.36-.92-.84-1.7-1.619-2.477s-1.561-1.254-2.483-1.609c-.891-.345-1.909-.58-3.399-.644s-1.97-.081-5.772-.074-4.278,.024-5.771,.096m.164,25.309c-1.365-.059-2.106-.286-2.6-.476-.654-.252-1.12-.557-1.612-1.044s-.795-.955-1.05-1.608c-.192-.494-.423-1.234-.487-2.599-.069-1.475-.084-1.918-.092-5.656s.006-4.18,.071-5.656c.058-1.364,.286-2.106,.476-2.6,.252-.655,.556-1.12,1.044-1.612s.955-.795,1.608-1.05c.493-.193,1.234-.422,2.598-.487,1.476-.07,1.919-.084,5.656-.092,3.737-.008,4.181,.006,5.658,.071,1.364,.059,2.106,.285,2.599,.476,.654,.252,1.12,.555,1.612,1.044s.795,.954,1.051,1.609c.193,.492,.422,1.232,.486,2.597,.07,1.476,.086,1.919,.093,5.656,.007,3.737-.006,4.181-.071,5.656-.06,1.365-.286,2.106-.476,2.601-.252,.654-.556,1.12-1.045,1.612s-.955,.795-1.608,1.05c-.493,.192-1.234,.422-2.597,.487-1.476,.069-1.919,.084-5.657,.092s-4.18-.007-5.656-.071M21.779,8.517c.002,.928,.755,1.679,1.683,1.677s1.679-.755,1.677-1.683c-.002-.928-.755-1.679-1.683-1.677,0,0,0,0,0,0-.928,.002-1.678,.755-1.677,1.683m-12.967,7.496c.008,3.97,3.232,7.182,7.202,7.174s7.183-3.232,7.176-7.202c-.008-3.97-3.233-7.183-7.203-7.175s-7.182,3.233-7.174,7.203m2.522-.005c-.005-2.577,2.08-4.671,4.658-4.676,2.577-.005,4.671,2.08,4.676,4.658,.005,2.577-2.08,4.671-4.658,4.676-2.577,.005-4.671-2.079-4.676-4.656h0"/></svg> Instagram</a>
@@ -835,14 +876,9 @@ textarea.form-input { resize: vertical; min-height: 105px; }
   <p class="page-subtitle">A collection of my work in full-stack web development, database design, and software architecture.</p>
   <div class="projects-grid">
     <a class="project-card" href="https://youtu.be/CwC7mgQaUEw" target="_blank" rel="noopener"><div class="project-card-cover" style="background:#1a0a2e url('https://img.youtube.com/vi/CwC7mgQaUEw/sddefault.jpg') center/cover no-repeat"></div><div class="project-card-body"><div class="project-card-name">SportX Club Management</div><p class="project-card-desc">Full-stack capstone project (PAP) graded 20/20. Complete club management system with member roles, practice scheduling, finances, and integrated social network with posts and interactions.</p><div class="project-card-tags"><span class="tag tag-pink">Ruby on Rails</span><span class="tag tag-purple">PostgreSQL</span><span class="tag tag-amber">HTML</span><span class="tag tag-teal">WSL (Ubuntu)</span><span class="tag">GitHub</span></div></div></a>
-    <a class="project-card" href="#"><div class="project-card-cover" style="background:linear-gradient(135deg,#1a0d1a,#3d1440)">🎨</div><div class="project-card-body"><div class="project-card-name">Scuola Edile Website Redesign</div><p class="project-card-desc">Ongoing ERASMUS project redesigning official website for Italian construction training institution. Modern responsive layout with training course listings, safety portal, and efficient participant registration.</p><div class="project-card-tags"><span class="tag tag-pink">HTML/CSS</span><span class="tag tag-amber">Responsive</span><span class="tag tag-teal">Accessibility</span></div></div></a>
-    <a class="project-card" href="#"><div class="project-card-cover" style="background:linear-gradient(135deg,#0a1a1a,#0d3d3a)">🔐</div><div class="project-card-body"><div class="project-card-name">User Authentication System</div><p class="project-card-desc">Secure role-based access control implementation with multiple user tiers (admins, staff, athletes, members) with granular permission management.</p><div class="project-card-tags"><span class="tag tag-teal">Security</span><span class="tag tag-purple">PostgreSQL</span><span class="tag">PHP</span></div></div></a>
-    <a class="project-card" href="#"><div class="project-card-cover" style="background:linear-gradient(135deg,#1a1200,#3a2d00)">📊</div><div class="project-card-body"><div class="project-card-name">Analytics &amp; Dashboard</div><p class="project-card-desc">Real-time statistics and analytics dashboard for club managers with data visualization, member insights, and financial tracking.</p><div class="project-card-tags"><span class="tag tag-amber">PHP</span><span class="tag tag-pink">Data Visualization</span></div></div></a>
-    <a class="project-card" href="#"><div class="project-card-cover" style="background:linear-gradient(135deg,#001a10,#003d2a)">🌐</div><div class="project-card-body"><div class="project-card-name">Social Network Integration</div><p class="project-card-desc">Built-in social features including posts, comments, likes, saves, and reports. Real-time interaction system with content moderation capabilities.</p><div class="project-card-tags"><span class="tag tag-teal">Ruby Rails</span><span class="tag tag-purple">Real-time</span></div></div></a>
-    <a class="project-card" href="#"><div class="project-card-cover" style="background:linear-gradient(135deg,#1a001a,#3a0040)">📱</div><div class="project-card-body"><div class="project-card-name">Responsive Web Design</div><p class="project-card-desc">Mobile-first approach ensuring seamless experience across all devices. Clean, modern interfaces with intuitive UX design.</p><div class="project-card-tags"><span class="tag tag-pink">Mobile-First</span><span class="tag tag-purple">CSS3</span></div></div></a>
+    <a class="project-card" href="#" onclick="openProjectModal('scuolaEdile'); return false;"><div class="project-card-cover" style="background:linear-gradient(135deg,#1a0d1a,#3d1440)">🎨</div><div class="project-card-body"><div class="project-card-name">Scuola Edile Website Redesign</div><p class="project-card-desc">Ongoing ERASMUS project redesigning official website for Italian construction training institution. Modern responsive layout with training course listings, safety portal, and efficient participant registration.</p><div class="project-card-tags"><span class="tag tag-pink">HTML/CSS</span><span class="tag tag-amber">Responsive</span><span class="tag tag-teal">Accessibility</span></div></div></a>
   </div>
   <div class="social-footer">
-    <span class="sf-label">Connect</span>
     <a class="sf-btn" href="https://github.com/Nogueira-12" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M16,2.345c7.735,0,14,6.265,14,14-.002,6.015-3.839,11.359-9.537,13.282-.7,.14-.963-.298-.963-.665,0-.473,.018-1.978,.018-3.85,0-1.312-.437-2.152-.945-2.59,3.115-.35,6.388-1.54,6.388-6.912,0-1.54-.543-2.783-1.435-3.762,.14-.35,.63-1.785-.14-3.71,0,0-1.173-.385-3.85,1.435-1.12-.315-2.31-.472-3.5-.472s-2.38,.157-3.5,.472c-2.677-1.802-3.85-1.435-3.85-1.435-.77,1.925-.28,3.36-.14,3.71-.892,.98-1.435,2.24-1.435,3.762,0,5.355,3.255,6.563,6.37,6.913-.403,.35-.77,.963-.893,1.872-.805,.368-2.818,.963-4.077-1.155-.263-.42-1.05-1.452-2.152-1.435-1.173,.018-.472,.665,.017,.927,.595,.332,1.277,1.575,1.435,1.978,.28,.787,1.19,2.293,4.707,1.645,0,1.173,.018,2.275,.018,2.607,0,.368-.263,.787-.963,.665-5.719-1.904-9.576-7.255-9.573-13.283,0-7.735,6.265-14,14-14Z"/></svg> GitHub</a>
     <a class="sf-btn" href="https://www.linkedin.com/in/tomás-nogueira-33b347402/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M26.111,3H5.889c-1.595,0-2.889,1.293-2.889,2.889V26.111c0,1.595,1.293,2.889,2.889,2.889H26.111c1.595,0,2.889-1.293,2.889-2.889V5.889c0-1.595-1.293-2.889-2.889-2.889ZM10.861,25.389h-3.877V12.87h3.877v12.519Zm-1.957-14.158c-1.267,0-2.293-1.034-2.293-2.31s1.026-2.31,2.293-2.31,2.292,1.034,2.292,2.31-1.026,2.31-2.292,2.31Zm16.485,14.158h-3.858v-6.571c0-1.802-.685-2.809-2.111-2.809-1.551,0-2.362,1.048-2.362,2.809v6.571h-3.718V12.87h3.718v1.686s1.118-2.069,3.775-2.069,4.556,1.621,4.556,4.975v7.926Z" fill-rule="evenodd"/></svg> LinkedIn</a>
     <a class="sf-btn" href="https://www.instagram.com/nogueira.__.12/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M10.202,2.098c-1.49,.07-2.507,.308-3.396,.657-.92,.359-1.7,.84-2.477,1.619-.776,.779-1.254,1.56-1.61,2.481-.345,.891-.578,1.909-.644,3.4-.066,1.49-.08,1.97-.073,5.771s.024,4.278,.096,5.772c.071,1.489,.308,2.506,.657,3.396,.359,.92,.84,1.7,1.619,2.477,.779,.776,1.559,1.253,2.483,1.61,.89,.344,1.909,.579,3.399,.644,1.49,.065,1.97,.08,5.771,.073,3.801-.007,4.279-.024,5.773-.095s2.505-.309,3.395-.657c.92-.36,1.701-.84,2.477-1.62s1.254-1.561,1.609-2.483c.345-.89,.579-1.909,.644-3.398,.065-1.494,.081-1.971,.073-5.773s-.024-4.278-.095-5.771-.308-2.507-.657-3.397c-.36-.92-.84-1.7-1.619-2.477s-1.561-1.254-2.483-1.609c-.891-.345-1.909-.58-3.399-.644s-1.97-.081-5.772-.074-4.278,.024-5.771,.096m.164,25.309c-1.365-.059-2.106-.286-2.6-.476-.654-.252-1.12-.557-1.612-1.044s-.795-.955-1.05-1.608c-.192-.494-.423-1.234-.487-2.599-.069-1.475-.084-1.918-.092-5.656s.006-4.18,.071-5.656c.058-1.364,.286-2.106,.476-2.6,.252-.655,.556-1.12,1.044-1.612s.955-.795,1.608-1.05c.493-.193,1.234-.422,2.598-.487,1.476-.07,1.919-.084,5.656-.092,3.737-.008,4.181,.006,5.658,.071,1.364,.059,2.106,.285,2.599,.476,.654,.252,1.12,.555,1.612,1.044s.795,.954,1.051,1.609c.193,.492,.422,1.232,.486,2.597,.07,1.476,.086,1.919,.093,5.656,.007,3.737-.006,4.181-.071,5.656-.06,1.365-.286,2.106-.476,2.601-.252,.654-.556,1.12-1.045,1.612s-.955,.795-1.608,1.05c-.493,.192-1.234,.422-2.597,.487-1.476,.069-1.919,.084-5.657,.092s-4.18-.007-5.656-.071M21.779,8.517c.002,.928,.755,1.679,1.683,1.677s1.679-.755,1.677-1.683c-.002-.928-.755-1.679-1.683-1.677,0,0,0,0,0,0-.928,.002-1.678,.755-1.677,1.683m-12.967,7.496c.008,3.97,3.232,7.182,7.202,7.174s7.183-3.232,7.176-7.202c-.008-3.97-3.233-7.183-7.203-7.175s-7.182,3.233-7.174,7.203m2.522-.005c-.005-2.577,2.08-4.671,4.658-4.676,2.577-.005,4.671,2.08,4.676,4.658,.005,2.577-2.08,4.671-4.658,4.676-2.577,.005-4.671-2.079-4.676-4.656h0"/></svg> Instagram</a>
@@ -857,8 +893,9 @@ textarea.form-input { resize: vertical; min-height: 105px; }
     <div style="display:flex;flex-direction:column;gap:1rem;">
       <div class="about-card">
         <div class="about-title">I build things<br>people actually use.</div>
-        <p class="about-text">Hey, I'm Tomás — a 17-year-old Full-Stack Developer from Porto, Portugal. I've been coding seriously for years and recently completed my Professional Programming Course with an 18/20 average.</p>
-        <p class="about-text">My approach blends strong engineering fundamentals with genuine interest in UX and clean architecture. I care deeply about performance, intuitive interfaces, and writing code that other developers can work with. Currently preparing to enter Computer Science Engineering with a long-term focus on AI &amp; Machine Learning.</p>
+        <p class="about-text">Hey, I'm Tomás — a 17-year-old Full-Stack Developer from Porto, Portugal. I've been coding since 2023 and recently I've completed my Professional Programming Course with an 18/20 average.</p>
+        <p class="about-text">My approach blends strong engineering fundamentals with genuine interest in UX and clean architecture. I care deeply about performance, intuitive interfaces, and writing code that other developers can work with. 
+                              Currently preparing to enter Computer Science Engineering with a long-term focus on AI &amp; Machine Learning.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:1.5rem;">
           <button class="btn-primary" onclick="nav('contact',document.querySelectorAll('.nav-link')[3])">Get in Touch →</button>
           <a class="btn-outline" href="assets/CV_%20Tom%C3%A1s_Nogueira.pdf" download="CV_Tomas_Nogueira.pdf">View CV ↓</a>
@@ -871,7 +908,6 @@ textarea.form-input { resize: vertical; min-height: 105px; }
           <span class="skill-chip">HTML5</span><span class="skill-chip">CSS3</span><span class="skill-chip">Ruby</span>
           <span class="skill-chip">MySQL</span><span class="skill-chip">PostgreSQL</span><span class="skill-chip">Git</span>
           <span class="skill-chip">GitHub</span><span class="skill-chip">VS Code</span><span class="skill-chip">WSL</span>
-          <span class="skill-chip">Python</span><span class="skill-chip">TensorFlow</span>
         </div>
       </div>
     </div>
@@ -880,13 +916,12 @@ textarea.form-input { resize: vertical; min-height: 105px; }
       <div class="exp-card"><div class="exp-co">iS - Intelligent Solutions</div><div class="exp-role">Full-Stack Developer Internship</div><div class="exp-period">2026 May — June · Portugal</div></div>
       <div class="exp-card"><div class="exp-co">Semanto - Agenzia di Comunicazione</div><div class="exp-role">Web Developer (ERASMUS)</div><div class="exp-period">2026 April — May · Italy</div></div>
       <div class="exp-card"><div class="exp-co">Gigatel - Serviços E Equipamentos</div><div class="exp-role">Full-Stack Developer Internship</div><div class="exp-period">2025 May — June · Portugal</div></div>
-      <div class="exp-card"><div class="exp-co">Escola Secundária da Maia</div><div class="exp-role">Professional Programming Course</div><div class="exp-period">2023 — 2026 · Portugal</div></div>
       <div class="about-section-lbl" style="margin-top:1rem;">Education</div>
       <div class="exp-card"><div class="exp-co">Computer Science Engineering</div><div class="exp-role">Incoming Student (Focus: AI &amp; ML)</div><div class="exp-period">2026 — Future · Portugal</div></div>
+      <div class="exp-card"><div class="exp-co">Escola Secundária da Maia</div><div class="exp-role">Professional Programming Course</div><div class="exp-period">2023 — 2026 · Portugal</div></div>
     </div>
   </div>
   <div class="social-footer">
-    <span class="sf-label">Connect</span>
     <a class="sf-btn" href="https://github.com/Nogueira-12" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M16,2.345c7.735,0,14,6.265,14,14-.002,6.015-3.839,11.359-9.537,13.282-.7,.14-.963-.298-.963-.665,0-.473,.018-1.978,.018-3.85,0-1.312-.437-2.152-.945-2.59,3.115-.35,6.388-1.54,6.388-6.912,0-1.54-.543-2.783-1.435-3.762,.14-.35,.63-1.785-.14-3.71,0,0-1.173-.385-3.85,1.435-1.12-.315-2.31-.472-3.5-.472s-2.38,.157-3.5,.472c-2.677-1.802-3.85-1.435-3.85-1.435-.77,1.925-.28,3.36-.14,3.71-.892,.98-1.435,2.24-1.435,3.762,0,5.355,3.255,6.563,6.37,6.913-.403,.35-.77,.963-.893,1.872-.805,.368-2.818,.963-4.077-1.155-.263-.42-1.05-1.452-2.152-1.435-1.173,.018-.472,.665,.017,.927,.595,.332,1.277,1.575,1.435,1.978,.28,.787,1.19,2.293,4.707,1.645,0,1.173,.018,2.275,.018,2.607,0,.368-.263,.787-.963,.665-5.719-1.904-9.576-7.255-9.573-13.283,0-7.735,6.265-14,14-14Z"/></svg> GitHub</a>
     <a class="sf-btn" href="https://www.linkedin.com/in/tomás-nogueira-33b347402/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M26.111,3H5.889c-1.595,0-2.889,1.293-2.889,2.889V26.111c0,1.595,1.293,2.889,2.889,2.889H26.111c1.595,0,2.889-1.293,2.889-2.889V5.889c0-1.595-1.293-2.889-2.889-2.889ZM10.861,25.389h-3.877V12.87h3.877v12.519Zm-1.957-14.158c-1.267,0-2.293-1.034-2.293-2.31s1.026-2.31,2.293-2.31,2.292,1.034,2.292,2.31-1.026,2.31-2.292,2.31Zm16.485,14.158h-3.858v-6.571c0-1.802-.685-2.809-2.111-2.809-1.551,0-2.362,1.048-2.362,2.809v6.571h-3.718V12.87h3.718v1.686s1.118-2.069,3.775-2.069,4.556,1.621,4.556,4.975v7.926Z" fill-rule="evenodd"/></svg> LinkedIn</a>
     <a class="sf-btn" href="https://www.instagram.com/nogueira.__.12/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M10.202,2.098c-1.49,.07-2.507,.308-3.396,.657-.92,.359-1.7,.84-2.477,1.619-.776,.779-1.254,1.56-1.61,2.481-.345,.891-.578,1.909-.644,3.4-.066,1.49-.08,1.97-.073,5.771s.024,4.278,.096,5.772c.071,1.489,.308,2.506,.657,3.396,.359,.92,.84,1.7,1.619,2.477,.779,.776,1.559,1.253,2.483,1.61,.89,.344,1.909,.579,3.399,.644,1.49,.065,1.97,.08,5.771,.073,3.801-.007,4.279-.024,5.773-.095s2.505-.309,3.395-.657c.92-.36,1.701-.84,2.477-1.62s1.254-1.561,1.609-2.483c.345-.89,.579-1.909,.644-3.398,.065-1.494,.081-1.971,.073-5.773s-.024-4.278-.095-5.771-.308-2.507-.657-3.397c-.36-.92-.84-1.7-1.619-2.477s-1.561-1.254-2.483-1.609c-.891-.345-1.909-.58-3.399-.644s-1.97-.081-5.772-.074-4.278,.024-5.771,.096m.164,25.309c-1.365-.059-2.106-.286-2.6-.476-.654-.252-1.12-.557-1.612-1.044s-.795-.955-1.05-1.608c-.192-.494-.423-1.234-.487-2.599-.069-1.475-.084-1.918-.092-5.656s.006-4.18,.071-5.656c.058-1.364,.286-2.106,.476-2.6,.252-.655,.556-1.12,1.044-1.612s.955-.795,1.608-1.05c.493-.193,1.234-.422,2.598-.487,1.476-.07,1.919-.084,5.656-.092,3.737-.008,4.181,.006,5.658,.071,1.364,.059,2.106,.285,2.599,.476,.654,.252,1.12,.555,1.612,1.044s.795,.954,1.051,1.609c.193,.492,.422,1.232,.486,2.597,.07,1.476,.086,1.919,.093,5.656,.007,3.737-.006,4.181-.071,5.656-.06,1.365-.286,2.106-.476,2.601-.252,.654-.556,1.12-1.045,1.612s-.955,.795-1.608,1.05c-.493,.192-1.234,.422-2.597,.487-1.476,.069-1.919,.084-5.657,.092s-4.18-.007-5.656-.071M21.779,8.517c.002,.928,.755,1.679,1.683,1.677s1.679-.755,1.677-1.683c-.002-.928-.755-1.679-1.683-1.677,0,0,0,0,0,0-.928,.002-1.678,.755-1.677,1.683m-12.967,7.496c.008,3.97,3.232,7.182,7.202,7.174s7.183-3.232,7.176-7.202c-.008-3.97-3.233-7.183-7.203-7.175s-7.182,3.233-7.174,7.203m2.522-.005c-.005-2.577,2.08-4.671,4.658-4.676,2.577-.005,4.671,2.08,4.676,4.658,.005,2.577-2.08,4.671-4.658,4.676-2.577,.005-4.671-2.079-4.676-4.656h0"/></svg> Instagram</a>
@@ -920,7 +955,6 @@ textarea.form-input { resize: vertical; min-height: 105px; }
     </div>
   </div>
   <div class="social-footer">
-    <span class="sf-label">Connect</span>
     <a class="sf-btn" href="https://github.com/Nogueira-12" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M16,2.345c7.735,0,14,6.265,14,14-.002,6.015-3.839,11.359-9.537,13.282-.7,.14-.963-.298-.963-.665,0-.473,.018-1.978,.018-3.85,0-1.312-.437-2.152-.945-2.59,3.115-.35,6.388-1.54,6.388-6.912,0-1.54-.543-2.783-1.435-3.762,.14-.35,.63-1.785-.14-3.71,0,0-1.173-.385-3.85,1.435-1.12-.315-2.31-.472-3.5-.472s-2.38,.157-3.5,.472c-2.677-1.802-3.85-1.435-3.85-1.435-.77,1.925-.28,3.36-.14,3.71-.892,.98-1.435,2.24-1.435,3.762,0,5.355,3.255,6.563,6.37,6.913-.403,.35-.77,.963-.893,1.872-.805,.368-2.818,.963-4.077-1.155-.263-.42-1.05-1.452-2.152-1.435-1.173,.018-.472,.665,.017,.927,.595,.332,1.277,1.575,1.435,1.978,.28,.787,1.19,2.293,4.707,1.645,0,1.173,.018,2.275,.018,2.607,0,.368-.263,.787-.963,.665-5.719-1.904-9.576-7.255-9.573-13.283,0-7.735,6.265-14,14-14Z"/></svg> GitHub</a>
     <a class="sf-btn" href="https://www.linkedin.com/in/tomás-nogueira-33b347402/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M26.111,3H5.889c-1.595,0-2.889,1.293-2.889,2.889V26.111c0,1.595,1.293,2.889,2.889,2.889H26.111c1.595,0,2.889-1.293,2.889-2.889V5.889c0-1.595-1.293-2.889-2.889-2.889ZM10.861,25.389h-3.877V12.87h3.877v12.519Zm-1.957-14.158c-1.267,0-2.293-1.034-2.293-2.31s1.026-2.31,2.293-2.31,2.292,1.034,2.292,2.31-1.026,2.31-2.292,2.31Zm16.485,14.158h-3.858v-6.571c0-1.802-.685-2.809-2.111-2.809-1.551,0-2.362,1.048-2.362,2.809v6.571h-3.718V12.87h3.718v1.686s1.118-2.069,3.775-2.069,4.556,1.621,4.556,4.975v7.926Z" fill-rule="evenodd"/></svg> LinkedIn</a>
     <a class="sf-btn" href="https://www.instagram.com/nogueira.__.12/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 32 32"><path d="M10.202,2.098c-1.49,.07-2.507,.308-3.396,.657-.92,.359-1.7,.84-2.477,1.619-.776,.779-1.254,1.56-1.61,2.481-.345,.891-.578,1.909-.644,3.4-.066,1.49-.08,1.97-.073,5.771s.024,4.278,.096,5.772c.071,1.489,.308,2.506,.657,3.396,.359,.92,.84,1.7,1.619,2.477,.779,.776,1.559,1.253,2.483,1.61,.89,.344,1.909,.579,3.399,.644,1.49,.065,1.97,.08,5.771,.073,3.801-.007,4.279-.024,5.773-.095s2.505-.309,3.395-.657c.92-.36,1.701-.84,2.477-1.62s1.254-1.561,1.609-2.483c.345-.89,.579-1.909,.644-3.398,.065-1.494,.081-1.971,.073-5.773s-.024-4.278-.095-5.771-.308-2.507-.657-3.397c-.36-.92-.84-1.7-1.619-2.477s-1.561-1.254-2.483-1.609c-.891-.345-1.909-.58-3.399-.644s-1.97-.081-5.772-.074-4.278,.024-5.771,.096m.164,25.309c-1.365-.059-2.106-.286-2.6-.476-.654-.252-1.12-.557-1.612-1.044s-.795-.955-1.05-1.608c-.192-.494-.423-1.234-.487-2.599-.069-1.475-.084-1.918-.092-5.656s.006-4.18,.071-5.656c.058-1.364,.286-2.106,.476-2.6,.252-.655,.556-1.12,1.044-1.612s.955-.795,1.608-1.05c.493-.193,1.234-.422,2.598-.487,1.476-.07,1.919-.084,5.656-.092,3.737-.008,4.181,.006,5.658,.071,1.364,.059,2.106,.285,2.599,.476,.654,.252,1.12,.555,1.612,1.044s.795,.954,1.051,1.609c.193,.492,.422,1.232,.486,2.597,.07,1.476,.086,1.919,.093,5.656,.007,3.737-.006,4.181-.071,5.656-.06,1.365-.286,2.106-.476,2.601-.252,.654-.556,1.12-1.045,1.612s-.955,.795-1.608,1.05c-.493,.192-1.234,.422-2.597,.487-1.476,.069-1.919,.084-5.657,.092s-4.18-.007-5.656-.071M21.779,8.517c.002,.928,.755,1.679,1.683,1.677s1.679-.755,1.677-1.683c-.002-.928-.755-1.679-1.683-1.677,0,0,0,0,0,0-.928,.002-1.678,.755-1.677,1.683m-12.967,7.496c.008,3.97,3.232,7.182,7.202,7.174s7.183-3.232,7.176-7.202c-.008-3.97-3.233-7.183-7.203-7.175s-7.182,3.233-7.174,7.203m2.522-.005c-.005-2.577,2.08-4.671,4.658-4.676,2.577-.005,4.671,2.08,4.676,4.658,.005,2.577-2.08,4.671-4.658,4.676-2.577,.005-4.671-2.079-4.676-4.656h0"/></svg> Instagram</a>
@@ -930,7 +964,59 @@ textarea.form-input { resize: vertical; min-height: 105px; }
 </main>
 </div>
 
+<!-- ══ PROJECT DETAIL MODAL ══ -->
+<div class="project-modal-overlay" id="projectModal" onclick="if(event.target===this)closeProjectModal()">
+  <div class="project-modal" role="dialog" aria-modal="true" aria-labelledby="pmTitle">
+    <button class="project-modal-close" onclick="closeProjectModal()" aria-label="Fechar">✕</button>
+    <div class="project-modal-cover" id="pmCover"></div>
+    <div class="project-modal-body">
+      <div class="project-modal-status" id="pmStatus"></div>
+      <h2 class="project-modal-title" id="pmTitle"></h2>
+      <div class="project-modal-tags" id="pmTags"></div>
+      <div class="project-modal-desc" id="pmDesc"></div>
+    </div>
+  </div>
+</div>
+
 <script>
+/* ── Project detail modal (for in-development projects) ── */
+const PROJECTS = {
+  scuolaEdile: {
+    title: "Scuola Edile — Website Redesign",
+    status: "In Development · ERASMUS Internship (Italy)",
+    cover: "linear-gradient(135deg,#1a0d1a,#3d1440)",
+    emoji: "🎨",
+    tags: [["tag-pink","HTML/CSS"],["tag-amber","Responsive"],["tag-teal","Accessibility"]],
+    desc: [
+      "Redesign of the official website for <strong>Scuola Edile — Centro per la Formazione e Sicurezza in Edilizia</strong>, an Italian construction training and safety institution. Developed during an <strong>ERASMUS internship</strong> at Semanto (Agenzia di Comunicazione), in Italy.",
+      "The new site features a modern, fully responsive layout with a training course catalogue, a safety &amp; certification portal, and a streamlined participant registration flow — built with an accessibility-first approach.",
+      "This project is currently <strong>in development</strong>. A live link will be added here once it goes public."
+    ]
+  }
+};
+
+function openProjectModal(key) {
+  const p = PROJECTS[key];
+  if (!p) return;
+  const cover = document.getElementById('pmCover');
+  cover.style.background = p.cover || 'var(--surface2)';
+  cover.textContent = p.emoji || '';
+  document.getElementById('pmStatus').innerHTML = p.status ? '<span class="pm-dot"></span>' + p.status : '';
+  document.getElementById('pmStatus').style.display = p.status ? 'inline-flex' : 'none';
+  document.getElementById('pmTitle').textContent = p.title || '';
+  document.getElementById('pmTags').innerHTML = (p.tags || []).map(t => '<span class="tag ' + t[0] + '">' + t[1] + '</span>').join('');
+  document.getElementById('pmDesc').innerHTML = (p.desc || []).map(d => '<p>' + d + '</p>').join('');
+  document.getElementById('projectModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeProjectModal() {
+  document.getElementById('projectModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeProjectModal(); });
+
 function nav(id, btn) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.nav-link').forEach(n => n.classList.remove('active'));
