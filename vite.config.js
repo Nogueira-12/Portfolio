@@ -3,6 +3,8 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
+  // relative paths: the same build works at a domain root (Vercel) and under /Portfolio/ (GitHub Pages)
+  base: './',
   build: {
     target: 'es2020',
     assetsDir: 'static',

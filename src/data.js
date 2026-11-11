@@ -9,8 +9,8 @@ export const PROFILE = {
   email: 'tomassn2008@gmail.com',
   whatsapp: '+351 934 474 997',
   whatsappLink: 'https://wa.me/351934474997',
-  cv: '/assets/Tomas_Nogueira_CV.pdf',
-  photo: '/assets/profile_picture.jpg',
+  cv: 'assets/Tomas_Nogueira_CV.pdf',
+  photo: 'assets/profile_picture.jpg',
 };
 
 export const SOCIALS = [
@@ -24,25 +24,25 @@ export const SECTIONS = ['carhelp', 'work', 'about', 'experience', 'collaborate'
 
 export const CARHELP = {
   url: 'https://carhelp.pt',
-  icon: '/carhelp/app-icon.png',
+  icon: 'carhelp/app-icon.png',
   steps: ['analise', 'garagem', 'inicio'],
 };
 
 /* app screenshots exist in Portuguese (/carhelp) and English (/carhelp/en), like on carhelp.pt */
-export const appMedia = (lang, file) => `/carhelp/${lang === 'en' ? 'en/' : ''}${file}`;
+export const appMedia = (lang, file) => `carhelp/${lang === 'en' ? 'en/' : ''}${file}`;
 
 const PROJECTS_BASE = (lang) => [
   { id: 'carhelp-app', title: 'CarHelp', year: '2026', status: 'soon', cover: { type: 'phone', img: appMedia(lang, 'phone-analise.webp'), tone: 'blue' }, links: ['https://carhelp.pt'] },
-  { id: 'carhelp-web', title: 'CarHelp', year: '2026', status: 'live', cover: { type: 'shot', img: lang === 'en' ? '/work/carhelp-web-en.jpg' : '/work/carhelp-web.jpg', tone: 'violet' }, links: [lang === 'en' ? 'https://carhelp.pt/en/' : 'https://carhelp.pt'] },
-  { id: 'scuola-edile', title: 'Scuola Edile', year: '2026', status: 'live', cover: { type: 'shot', img: '/work/scuola-edile.jpg', tone: 'warm' }, links: ['https://formedilarezzo.it'] },
+  { id: 'carhelp-web', title: 'CarHelp', year: '2026', status: 'live', cover: { type: 'shot', img: lang === 'en' ? 'work/carhelp-web-en.jpg' : 'work/carhelp-web.jpg', tone: 'violet' }, links: [lang === 'en' ? 'https://carhelp.pt/en/' : 'https://carhelp.pt'] },
+  { id: 'scuola-edile', title: 'Scuola Edile', year: '2026', status: 'live', cover: { type: 'shot', img: 'work/scuola-edile.jpg', tone: 'warm' }, links: ['https://formedilarezzo.it'] },
   { id: 'sportx', title: 'SportX', year: '2026', status: 'done', video: 'CwC7mgQaUEw', cover: { type: 'banner', tone: 'orange' }, links: ['https://youtu.be/CwC7mgQaUEw'] },
 ];
 
 const EXPERIENCE_BASE = [
-  { company: 'CarHelp', logo: '/carhelp/app-icon.png', current: true },
-  { company: 'iS — Intelligent Solutions', logo: '/assets/is-logo.svg', current: true },
-  { company: 'Semanto — Agenzia di Comunicazione', logo: '/assets/LOGO-SEMANTO-white-sx.png', current: true },
-  { company: 'Gigatel — Serviços e Equipamentos', logo: '/assets/gigatel-logo.png', current: false },
+  { company: 'CarHelp', logo: 'carhelp/app-icon.png', current: true },
+  { company: 'iS — Intelligent Solutions', logo: 'assets/is-logo.svg', current: true },
+  { company: 'Semanto — Agenzia di Comunicazione', logo: 'assets/LOGO-SEMANTO-white-sx.png', current: true },
+  { company: 'Gigatel — Serviços e Equipamentos', logo: 'assets/gigatel-logo.png', current: false },
 ];
 
 export const STATS = [
@@ -67,11 +67,11 @@ const COLLAB_BASE = [
 
 export const CLIENTS = [
   // `raw: true` keeps the logo's own shapes (it has filled boxes that turn into a white block when inverted)
-  { name: 'Formedil — Scuola Edile Arezzo', logo: '/assets/formedil-logo.png', href: 'https://formedilarezzo.it', raw: true },
-  { name: 'Gigatel', logo: '/assets/gigatel-logo.png', href: 'https://gigatel.com/' },
-  { name: 'iS — Intelligent Solutions', logo: '/assets/is-logo.svg', href: 'https://www.is-intelligentsolutions.com/' },
-  { name: 'Semanto', logo: '/assets/LOGO-SEMANTO-white-sx.png', href: 'https://semanto.it/' },
-  { name: 'Agrupamento de Escolas da Maia', logo: '/assets/LogoAEMAIA.png', href: 'https://www.aemaia.pt/index.php/agrupamento/escolas/escola-secundaria-da-maia' },
+  { name: 'Formedil — Scuola Edile Arezzo', logo: 'assets/formedil-logo.png', href: 'https://formedilarezzo.it', raw: true },
+  { name: 'Gigatel', logo: 'assets/gigatel-logo.png', href: 'https://gigatel.com/' },
+  { name: 'iS — Intelligent Solutions', logo: 'assets/is-logo.svg', href: 'https://www.is-intelligentsolutions.com/' },
+  { name: 'Semanto', logo: 'assets/LOGO-SEMANTO-white-sx.png', href: 'https://semanto.it/' },
+  { name: 'Agrupamento de Escolas da Maia', logo: 'assets/LogoAEMAIA.png', href: 'https://www.aemaia.pt/index.php/agrupamento/escolas/escola-secundaria-da-maia' },
 ];
 
 // EmailJS + invisible reCAPTCHA v2 (same keys as the previous site).

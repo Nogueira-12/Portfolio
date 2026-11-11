@@ -39,7 +39,14 @@ The site opens in Portuguese for Portuguese browsers and in English otherwise; `
 Fonts are self-hosted (Geist, Geist Mono and Instrument Serif via Fontsource), so there are no requests to Google Fonts.
 Images are in `public/` (`public/assets`, `public/carhelp`, `public/work`).
 
-## Deploy (Vercel)
+## Deploy (GitHub Pages)
+
+O site é compilado e publicado automaticamente a cada push para o `main`
+([.github/workflows/deploy.yml](.github/workflows/deploy.yml)) e fica em <https://nogueira-12.github.io/Portfolio/>.
+
+Configuração (uma vez só): no GitHub, **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+## Deploy (Vercel, alternativa)
 
 1. Go to <https://vercel.com/new> and import the GitHub repo `Nogueira-12/Portfolio`.
 2. Vercel detects Vite automatically (settings are also in `vercel.json`). Click **Deploy**.

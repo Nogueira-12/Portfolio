@@ -19,12 +19,14 @@ function Screen() {
   );
 }
 
+// Vercel Analytics only exists on Vercel; elsewhere (GitHub Pages) its script would 404
+const onVercel = typeof window !== 'undefined' && !window.location.hostname.endsWith('github.io');
+
 export default function App() {
   return (
     <SystemProvider>
       <Screen />
-      <Analytics />
-      <SpeedInsights />
+      {onVercel && <><Analytics /><SpeedInsights /></>}
     </SystemProvider>
   );
 }

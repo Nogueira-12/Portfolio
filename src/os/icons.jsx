@@ -60,10 +60,10 @@ const G = {
 
 /* A rounded "app" tile: a gradient + a glyph (or an image). */
 const TILES = {
-  about: { img: '/assets/profile_picture.jpg' },
+  about: { img: 'assets/profile_picture.jpg' },
   projects: { bg: 'linear-gradient(160deg,#6cb6ff,#2563eb 60%,#1e3a8a)', glyph: 'folder', color: '#e8f2ff' },
   project: { bg: 'linear-gradient(160deg,#6cb6ff,#2563eb 60%,#1e3a8a)', glyph: 'folder', color: '#e8f2ff' },
-  carhelp: { img: '/carhelp/app-icon.png' },
+  carhelp: { img: 'carhelp/app-icon.png' },
   experience: { bg: 'linear-gradient(160deg,#ffcf6b,#f59e0b 55%,#b45309)', glyph: 'briefcase', color: '#fff8e8' },
   skills: { bg: 'linear-gradient(160deg,#b69bff,#7c3aed 55%,#4c1d95)', glyph: 'layers', color: '#f3edff' },
   terminal: { bg: 'linear-gradient(160deg,#2a2a30,#0c0c0f)', glyph: 'terminal', color: '#d7ff3f', ring: true },
