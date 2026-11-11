@@ -1,0 +1,18 @@
+# Ficheiros de vídeo (demasiado grandes para o GitHub — limite 100 MB)
+*.mp4
+*.mov
+*.avi
+*.mkv
+
+# Build / dependências
+node_modules
+dist
+.vercel
+
+# Sistema
+Thumbs.db
+.DS_Store
+
+# Versão anterior (só local)
+_old-v2
+.vite
