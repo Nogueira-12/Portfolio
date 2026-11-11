@@ -25,6 +25,8 @@ export const SECTIONS = ['carhelp', 'work', 'about', 'experience', 'collaborate'
 export const CARHELP = {
   url: 'https://carhelp.pt',
   icon: 'carhelp/app-icon.png',
+  // link of the app on Google Play — until it's set, the Google Play badge opens carhelp.pt
+  playStore: '',
   steps: ['analise', 'garagem', 'inicio'],
 };
 
@@ -32,9 +34,9 @@ export const CARHELP = {
 export const appMedia = (lang, file) => `carhelp/${lang === 'en' ? 'en/' : ''}${file}`;
 
 const PROJECTS_BASE = (lang) => [
-  { id: 'carhelp-app', title: 'CarHelp', year: '2026', status: 'soon', cover: { type: 'phone', img: appMedia(lang, 'phone-analise.webp'), tone: 'blue' }, links: ['https://carhelp.pt'] },
+  { id: 'carhelp-app', title: 'CarHelp', year: '2026', status: 'live', cover: { type: 'phone', img: appMedia(lang, 'phone-analise.webp'), tone: 'blue' }, links: ['https://carhelp.pt'] },
   { id: 'carhelp-web', title: 'CarHelp', year: '2026', status: 'live', cover: { type: 'shot', img: lang === 'en' ? 'work/carhelp-web-en.jpg' : 'work/carhelp-web.jpg', tone: 'violet' }, links: [lang === 'en' ? 'https://carhelp.pt/en/' : 'https://carhelp.pt'] },
-  { id: 'scuola-edile', title: 'Scuola Edile', year: '2026', status: 'live', cover: { type: 'shot', img: 'work/scuola-edile.jpg', tone: 'warm' }, links: ['https://formedilarezzo.it'] },
+  { id: 'scuola-edile', title: 'Scuola Edile', year: '2026', status: 'maintenance', cover: { type: 'shot', img: 'work/scuola-edile.jpg', tone: 'warm' }, links: ['https://formedilarezzo.it'] },
   { id: 'sportx', title: 'SportX', year: '2026', status: 'done', video: 'CwC7mgQaUEw', cover: { type: 'banner', tone: 'orange' }, links: ['https://youtu.be/CwC7mgQaUEw'] },
 ];
 
@@ -54,8 +56,8 @@ export const STATS = [
 
 const STACK_BASE = [
   ['C++', 'PHP', 'JavaScript', 'HTML5', 'CSS3', 'MySQL', 'PostgreSQL'],
-  ['Dart', 'Flutter', 'VS Code', 'WSL'],
-  ['Ruby on Rails', 'Git', 'GitHub', 'WordPress'],
+  ['VS Code', 'WSL'],
+  ['Flutter', 'Dart', 'Ruby on Rails', 'Git', 'GitHub', 'WordPress'],
 ];
 
 const COLLAB_BASE = [
@@ -111,17 +113,17 @@ const en = {
     hint: 'move your cursor through it',
     badge: 'DEVELOPER • DESIGNER • FOUNDER • ',
     badgeAria: 'Scroll to CarHelp',
-    lede: 'Full-stack developer & UI/UX designer, 18. I build products people actually *use* — right now that’s *CarHelp,* launching on Google Play.',
+    lede: 'Full-stack developer & UI/UX designer, 18. I build products people actually *use* — right now that’s *CarHelp,* now on Google Play.',
     cta1: 'Explore CarHelp',
     cta2: 'See my work',
     scroll: 'Scroll',
   },
-  ticker: { main: ['Full-stack', 'UI/UX', 'Product', 'Web', 'Mobile', 'AI & ML'], aria: 'What I do', side: ['Open to paid collaborations', 'CarHelp', 'Launching soon', 'Google Play', 'Porto'] },
+  ticker: { main: ['Full-stack', 'UI/UX', 'Product', 'Web', 'Mobile', 'AI & ML'], aria: 'What I do', side: ['Open to paid collaborations', 'CarHelp', 'Out now', 'Google Play', 'Porto'] },
   carhelp: {
     eyebrow: 'Featured — my own product',
     lede: 'The app that tells you if a car repair quote is *fair* — before you pay.',
     live: 'Website live — carhelp.pt',
-    soon: 'Android app — launching soon on Google Play',
+    soon: 'Android app — out now on Google Play',
     steps: [
       { label: 'Quote analysis', title: 'Is this quote fair?', text: 'Snap a photo of a workshop quote. CarHelp reads it line by line — parts, labour, fees, VAT — and gives a clear verdict in under a minute: fair, expensive or suspicious, with the normal price range and what to ask the mechanic.' },
       { label: 'Your garage', title: 'Your car, under control.', text: 'Several cars, mileage, yearly spend and cost per km. Reminders for servicing, inspection (IPO), insurance and IUC tax — by date or by kilometres — so nothing slips.' },
@@ -135,22 +137,22 @@ const en = {
     ],
     visit: 'Visit carhelp.pt',
     caseStudy: 'Read the case study',
-    gplaySmall: 'Coming soon on',
-    gplayAria: 'Google Play — coming soon',
+    gplaySmall: 'Get it on',
+    gplayAria: 'Get it on Google Play',
     screen: 'CarHelp screen',
   },
   work: { title: 'Selected work', note: (n) => `${n} projects`, open: 'Open' },
   projects: {
     'carhelp-app': {
       subtitle: 'Android App',
-      statusLabel: 'Launching soon · Google Play',
-      chip: 'Coming soon',
+      statusLabel: 'Out now · Google Play',
+      chip: 'Out now',
       tags: ['Android', 'AI', 'UI/UX', 'Product'],
       summary: 'My own product: an AI-powered app that tells drivers if a car repair quote is fair — plus a garage, reminders and diagnostics.',
       body: [
         'CarHelp is a product I designed and built from scratch. Drivers photograph a workshop quote and the app reads it line by line — parts, labour, fees and VAT — returning a verdict (fair, expensive or suspicious), the normal price range, possible savings and the questions worth asking the mechanic.',
         'Beyond quotes, it’s a full garage: multiple cars, mileage, yearly spend and cost per km, with reminders for servicing, inspection (IPO), insurance and IUC. Diagnostics let you photograph a dashboard light, record a noise or look up an OBD code, and an AI assistant knows your car’s history.',
-        'There’s a free plan and a “CarHelp Completo” subscription with unlimited AI checks, family sharing and PDF maintenance reports. The Android app is in its final stretch and launching on Google Play very soon.',
+        'There’s a free plan and a “CarHelp Completo” subscription with unlimited AI checks, family sharing and PDF maintenance reports. The Android app is out now on Google Play.',
       ],
       links: ['carhelp.pt'],
     },
@@ -167,13 +169,13 @@ const en = {
     },
     'scuola-edile': {
       subtitle: 'Website Redesign',
-      statusLabel: 'Live · formedilarezzo.it',
+      statusLabel: 'Under maintenance · formedilarezzo.it',
       tags: ['HTML', 'CSS', 'JavaScript', 'PHP', 'WordPress'],
       summary: 'ERASMUS project in Italy: the redesign of an official construction training & safety institution’s website.',
       body: [
         'Redesign of the official website for Scuola Edile — Centro per la Formazione e Sicurezza in Edilizia, an Italian construction training and safety institution. Built during my ERASMUS internship at Semanto (Agenzia di Comunicazione), in Italy.',
         'A modern, fully responsive layout with a training course catalogue, a safety & certification portal and a streamlined registration process, built accessibility-first.',
-        'After the internship ended I kept collaborating remotely with Semanto to finish it — and we still work together. The site is now live.',
+        'After the internship ended I kept collaborating remotely with Semanto to finish it — and we still work together. The site is temporarily down for maintenance.',
       ],
       links: ['Visit formedilarezzo.it'],
     },
@@ -200,7 +202,7 @@ const en = {
     contact: 'Get in touch',
     photoAlt: 'Portrait of Tomás Nogueira',
     caption: ['Tomás Nogueira', '18 · Porto'],
-    stats: ['Years writing code', 'PAP capstone grade', 'Course average', 'Sites live in production'],
+    stats: ['Years writing code', 'PAP capstone grade', 'Course average', 'Sites shipped'],
   },
   experience: {
     title: 'Experience',
@@ -209,7 +211,7 @@ const en = {
     items: [
       { role: 'Founder · Designer & Developer', period: '2026 — Now', place: 'Porto, PT', text: 'Designing and building my own product end to end: the Android app, the AI quote analysis, the brand and the website at carhelp.pt.' },
       { role: 'IT Assistant', period: 'Jul 2026 — Now', place: 'Portugal', text: 'Building user-friendly web pages for data organisation with a strong UI/UX focus. Started as a Web Developer intern (May — July 2026), redesigning sections of the company website.' },
-      { role: 'Web Developer', period: 'Jul 2026 — Now', place: 'Italy · Remote', text: 'Web pages for data organisation with a UI/UX focus. Started as an ERASMUS internship (April — May 2026), where I built the Scuola Edile website, now live at formedilarezzo.it.' },
+      { role: 'Web Developer', period: 'Jul 2026 — Now', place: 'Italy · Remote', text: 'Web pages for data organisation with a UI/UX focus. Started as an ERASMUS internship (April — May 2026), where I built the Scuola Edile website (formedilarezzo.it — temporarily down for maintenance).' },
       { role: 'Hardware Technician · Internship', period: 'May — Jul 2025', place: 'Portugal', text: 'Maintenance of desktops and laptops, and installation of servers, racks, switches and access points.' },
     ],
     educationTitle: 'Education',
@@ -302,17 +304,17 @@ const pt = {
     hint: 'passa o cursor pelos pontos',
     badge: 'PROGRAMADOR • DESIGNER • FUNDADOR • ',
     badgeAria: 'Descer até à CarHelp',
-    lede: 'Programador full-stack e designer de UI/UX, 18 anos. Crio produtos que as pessoas *usam* mesmo — agora é a *CarHelp,* que está quase a chegar ao Google Play.',
+    lede: 'Programador full-stack e designer de UI/UX, 18 anos. Crio produtos que as pessoas *usam* mesmo — agora é a *CarHelp,* que já está no Google Play.',
     cta1: 'Conhecer a CarHelp',
     cta2: 'Ver projetos',
     scroll: 'Descer',
   },
-  ticker: { main: ['Full-stack', 'UI/UX', 'Produto', 'Web', 'Apps', 'IA & ML'], aria: 'O que faço', side: ['Aberto a colaborações pagas', 'CarHelp', 'Lançamento em breve', 'Google Play', 'Porto'] },
+  ticker: { main: ['Full-stack', 'UI/UX', 'Produto', 'Web', 'Apps', 'IA & ML'], aria: 'O que faço', side: ['Aberto a colaborações pagas', 'CarHelp', 'Já disponível', 'Google Play', 'Porto'] },
   carhelp: {
     eyebrow: 'Em destaque — o meu produto',
     lede: 'A app que te diz se o orçamento da oficina é *justo* — antes de pagares.',
     live: 'Site online — carhelp.pt',
-    soon: 'App Android — em breve no Google Play',
+    soon: 'App Android — já disponível no Google Play',
     steps: [
       { label: 'Análise de orçamentos', title: 'Este orçamento é justo?', text: 'Tira uma foto ao orçamento da oficina. A CarHelp lê-o linha a linha — peças, mão de obra, taxas, IVA — e em menos de um minuto dá-te um veredicto claro: justo, caro ou suspeito, com o intervalo normal de preço e o que perguntar ao mecânico.' },
       { label: 'A tua garagem', title: 'O teu carro, sob controlo.', text: 'Vários carros, quilómetros, gastos do ano e custo por km. Lembretes para a revisão, a inspeção (IPO), o seguro e o IUC — por data ou por quilómetros — para nada te escapar.' },
@@ -326,22 +328,22 @@ const pt = {
     ],
     visit: 'Visitar carhelp.pt',
     caseStudy: 'Ler o caso completo',
-    gplaySmall: 'Em breve no',
-    gplayAria: 'Google Play — em breve',
+    gplaySmall: 'Disponível no',
+    gplayAria: 'Disponível no Google Play',
     screen: 'Ecrã da CarHelp',
   },
   work: { title: 'Projetos', note: (n) => `${n} projetos`, open: 'Abrir' },
   projects: {
     'carhelp-app': {
       subtitle: 'App Android',
-      statusLabel: 'Em breve · Google Play',
-      chip: 'Em breve',
+      statusLabel: 'Disponível · Google Play',
+      chip: 'Disponível',
       tags: ['Android', 'IA', 'UI/UX', 'Produto'],
       summary: 'O meu produto: uma app com IA que diz aos condutores se um orçamento de oficina é justo — com garagem, lembretes e diagnóstico.',
       body: [
         'A CarHelp é um produto que desenhei e construí do zero. O condutor fotografa o orçamento da oficina e a app lê-o linha a linha — peças, mão de obra, taxas e IVA — e devolve um veredicto (justo, caro ou suspeito), o intervalo normal de preço, quanto pode poupar e as perguntas que vale a pena fazer ao mecânico.',
         'Para além dos orçamentos, é uma garagem completa: vários carros, quilómetros, gastos do ano e custo por km, com lembretes para a revisão, a inspeção (IPO), o seguro e o IUC. No diagnóstico podes fotografar uma luz do painel, gravar um barulho ou procurar um código OBD, e há um assistente com IA que conhece o histórico do carro.',
-        'Tem um plano grátis e uma subscrição “CarHelp Completo” com análises de IA ilimitadas, partilha com a família e relatórios de manutenção em PDF. A app Android está na reta final e chega ao Google Play muito em breve.',
+        'Tem um plano grátis e uma subscrição “CarHelp Completo” com análises de IA ilimitadas, partilha com a família e relatórios de manutenção em PDF. A app Android já está disponível no Google Play.',
       ],
       links: ['carhelp.pt'],
     },
@@ -358,13 +360,13 @@ const pt = {
     },
     'scuola-edile': {
       subtitle: 'Novo site',
-      statusLabel: 'Online · formedilarezzo.it',
+      statusLabel: 'Em manutenção · formedilarezzo.it',
       tags: ['HTML', 'CSS', 'JavaScript', 'PHP', 'WordPress'],
       summary: 'Projeto ERASMUS em Itália: o redesign do site oficial de uma instituição de formação e segurança na construção.',
       body: [
         'Redesign do site oficial da Scuola Edile — Centro per la Formazione e Sicurezza in Edilizia, uma instituição italiana de formação e segurança na construção. Feito durante o meu estágio ERASMUS na Semanto (Agenzia di Comunicazione), em Itália.',
         'Um layout moderno e totalmente responsivo, com o catálogo de cursos, um portal de segurança e certificação e um processo de inscrição mais simples, pensado para ser acessível.',
-        'Depois de o estágio acabar continuei a colaborar à distância com a Semanto para o terminar — e ainda trabalhamos juntos. O site já está online.',
+        'Depois de o estágio acabar continuei a colaborar à distância com a Semanto para o terminar — e ainda trabalhamos juntos. O site está temporariamente em baixo para manutenção.',
       ],
       links: ['Visitar formedilarezzo.it'],
     },
@@ -391,7 +393,7 @@ const pt = {
     contact: 'Fala comigo',
     photoAlt: 'Retrato de Tomás Nogueira',
     caption: ['Tomás Nogueira', '18 · Porto'],
-    stats: ['Anos a programar', 'Nota da PAP', 'Média do curso', 'Sites online'],
+    stats: ['Anos a programar', 'Nota da PAP', 'Média do curso', 'Sites publicados'],
   },
   experience: {
     title: 'Percurso',
@@ -400,7 +402,7 @@ const pt = {
     items: [
       { role: 'Fundador · Designer e Programador', period: '2026 — Agora', place: 'Porto, PT', text: 'Estou a desenhar e a construir o meu próprio produto do início ao fim: a app Android, a análise de orçamentos com IA, a marca e o site carhelp.pt.' },
       { role: 'Assistente de IT', period: 'Jul 2026 — Agora', place: 'Portugal', text: 'Desenvolvo páginas web para organizar dados, simples de usar e com muita atenção ao UI/UX. Comecei como estagiário de desenvolvimento web (maio — julho de 2026), a redesenhar secções do site da empresa.' },
-      { role: 'Programador Web', period: 'Jul 2026 — Agora', place: 'Itália · Remoto', text: 'Páginas web para organizar dados, com foco em UI/UX. Começou como estágio ERASMUS (abril — maio de 2026), onde fiz o site da Scuola Edile, agora online em formedilarezzo.it.' },
+      { role: 'Programador Web', period: 'Jul 2026 — Agora', place: 'Itália · Remoto', text: 'Páginas web para organizar dados, com foco em UI/UX. Começou como estágio ERASMUS (abril — maio de 2026), onde fiz o site da Scuola Edile (formedilarezzo.it — temporariamente em manutenção).' },
       { role: 'Técnico de Hardware · Estágio', period: 'Mai — Jul 2025', place: 'Portugal', text: 'Manutenção de computadores de secretária e portáteis, e instalação de servidores, racks, switches e access points.' },
     ],
     educationTitle: 'Formação',

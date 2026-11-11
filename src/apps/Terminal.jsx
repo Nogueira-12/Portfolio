@@ -52,7 +52,7 @@ export default function Terminal({ win }) {
         break;
       case 'ls':
       case 'projects':
-        out(t.projects.map((p) => `${p.status === 'live' ? '●' : p.status === 'soon' ? '◐' : '○'} ${p.title.padEnd(14)}${p.subtitle.padEnd(22)}${p.year}`));
+        out(t.projects.map((p) => `${p.status === 'live' ? '●' : p.status === 'maintenance' ? '◐' : '○'} ${p.title.padEnd(14)}${p.subtitle.padEnd(22)}${p.year}`));
         out([{ kind: 'dim', text: lang === 'pt' ? '→ “open projects” para os ver' : '→ “open projects” to browse them' }]);
         break;
       case 'open':

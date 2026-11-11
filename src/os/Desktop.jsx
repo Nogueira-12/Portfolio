@@ -193,7 +193,7 @@ function Widgets() {
         <button className="widget widget-carhelp" onClick={() => sys.open('carhelp')}>
           <AppIcon id="carhelp" size={44} />
           <strong>CarHelp</strong>
-          <span className="w-sub">{t.os.widgets.carhelpSoon}</span>
+          <span className="w-sub">{t.os.widgets.carhelpPlay}</span>
         </button>
         <div className="widget widget-clock" aria-label={`${t.os.widgets.clock} ${lisbon}`}>
           <svg viewBox="0 0 100 100" aria-hidden="true">

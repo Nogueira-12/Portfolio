@@ -21,12 +21,14 @@ export default function CarHelp() {
         <p className="ch-lede"><Rich text={c.lede} /></p>
         <div className="ch-badges">
           <span className="pill pill-live"><i className="dot-live" />{c.live}</span>
-          <span className="pill"><i className="dot-soon" />{c.soon}</span>
+          <span className="pill pill-live"><i className="dot-live" />{c.soon}</span>
         </div>
         <div className="ch-actions">
           <Btn variant="primary" href={CARHELP.url} external icon="external">{c.visit}</Btn>
           <Btn onClick={() => sys.open('project', { id: 'carhelp-app' })} icon="chevron">{c.caseStudy}</Btn>
-          <span className="gplay" aria-label={c.gplayAria}><PlayStore size={20} /><span><small>{c.gplaySmall}</small>Google Play</span></span>
+          <a className="gplay" href={CARHELP.playStore || CARHELP.url} target="_blank" rel="noopener noreferrer" aria-label={c.gplayAria}>
+            <PlayStore size={20} /><span><small>{c.gplaySmall}</small>Google Play</span>
+          </a>
         </div>
       </section>
 

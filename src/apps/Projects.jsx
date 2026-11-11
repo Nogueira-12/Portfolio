@@ -3,7 +3,7 @@ import { useSystem } from '../os/system.jsx';
 import { AppIcon, Glyph } from '../os/icons.jsx';
 import { Btn, Cover, Tags } from './ui.jsx';
 
-const FILTERS = ['all', 'live', 'soon', 'done'];
+const FILTERS = ['all', 'live', 'maintenance', 'done'];
 
 /* Finder-like browser of the projects */
 export default function Projects() {
