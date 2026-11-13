@@ -5,6 +5,7 @@ import { DOCK_ORDER, WALLPAPERS } from './meta.js';
 import { AppIcon, Battery, Glyph, Logo } from './icons.jsx';
 import { appTitle } from './apps.jsx';
 import { useLiquidGlass } from './liquid.js';
+import LiquidGlass from './LiquidGlass.jsx';
 
 const REPO = 'https://github.com/Nogueira-12/Portfolio';
 
@@ -173,8 +174,9 @@ function ControlCenter({ onClose }) {
         </div>
       </div>
       <div className="cc-row">
-        <button className="cc-btn lg lg-i lg-m" onClick={() => { onClose(); sys.lock(); }}><Glyph name="lock" size={14} /> {sys.t.os.menu.lock}</button>
-        <button className="cc-btn lg lg-i lg-m" onClick={() => { onClose(); sys.open('settings'); }}><Glyph name="sliders" size={14} /> {sys.t.os.apps.settings}</button>
+        {/* inside the Control Centre's glass: no second backdrop, so no refraction of their own */}
+        <LiquidGlass as="button" refraction={false} className="cc-btn" onClick={() => { onClose(); sys.lock(); }}><Glyph name="lock" size={14} /> {sys.t.os.menu.lock}</LiquidGlass>
+        <LiquidGlass as="button" refraction={false} className="cc-btn" onClick={() => { onClose(); sys.open('settings'); }}><Glyph name="sliders" size={14} /> {sys.t.os.apps.settings}</LiquidGlass>
       </div>
     </motion.div>
   );

@@ -11,6 +11,7 @@ import Spotlight from './Spotlight.jsx';
 import Notifications from './Notifications.jsx';
 import { PROFILE } from '../data.js';
 import { useLiquidGlass } from './liquid.js';
+import LiquidGlass from './LiquidGlass.jsx';
 
 const WIDGET_GLASS = { depth: 26, strength: 32, aberration: 0.16 };
 
@@ -180,13 +181,10 @@ function Widgets() {
   const sec = now.getSeconds();
   const min = now.getMinutes();
   const hr = Number(lisbon.slice(0, 2)) % 12;
-  const glassProfile = useLiquidGlass(WIDGET_GLASS);
-  const glassCarhelp = useLiquidGlass(WIDGET_GLASS);
-  const glassClock = useLiquidGlass(WIDGET_GLASS);
 
   return (
     <div className="widgets">
-      <button ref={glassProfile} className="widget widget-profile lg lg-i lg-m" onClick={() => sys.open('about')}>
+      <LiquidGlass as="button" refraction={WIDGET_GLASS} className="widget widget-profile" onClick={() => sys.open('about')}>
         <img src={PROFILE.photo} alt="" />
         <div>
           <span className="w-kicker">{t.os.widgets.hello}</span>
@@ -194,14 +192,14 @@ function Widgets() {
           <span className="w-sub">{t.nav.role}</span>
           <span className="w-status"><i className="dot-live" />{t.contact.statusValue}</span>
         </div>
-      </button>
+      </LiquidGlass>
       <div className="widget-row">
-        <button ref={glassCarhelp} className="widget widget-carhelp lg lg-i lg-m" onClick={() => sys.open('carhelp')}>
+        <LiquidGlass as="button" refraction={WIDGET_GLASS} className="widget widget-carhelp" onClick={() => sys.open('carhelp')}>
           <AppIcon id="carhelp" size={44} />
           <strong>CarHelp</strong>
           <span className="w-sub">{t.os.widgets.carhelpPlay}</span>
-        </button>
-        <div ref={glassClock} className="widget widget-clock lg" aria-label={`${t.os.widgets.clock} ${lisbon}`}>
+        </LiquidGlass>
+        <LiquidGlass refraction={WIDGET_GLASS} className="widget widget-clock" aria-label={`${t.os.widgets.clock} ${lisbon}`}>
           <svg viewBox="0 0 100 100" aria-hidden="true">
             <circle cx="50" cy="50" r="46" className="c-face" />
             {Array.from({ length: 12 }, (_, i) => (
@@ -213,7 +211,7 @@ function Widgets() {
             <circle cx="50" cy="50" r="2.6" className="c-pin" />
           </svg>
           <span className="w-sub">{t.os.widgets.clock} · {lisbon}</span>
-        </div>
+        </LiquidGlass>
       </div>
     </div>
   );
@@ -224,17 +222,16 @@ function HomeScreen() {
   const sys = useSystem();
   const { t } = sys;
   const apps = [...DOCK_ORDER, 'readme'];
-  const glass = useLiquidGlass(WIDGET_GLASS);
   return (
     <div className="home">
-      <button ref={glass} className="widget widget-profile lg lg-i lg-m" onClick={() => sys.open('about')}>
+      <LiquidGlass as="button" refraction={WIDGET_GLASS} className="widget widget-profile" onClick={() => sys.open('about')}>
         <img src={PROFILE.photo} alt="" />
         <div>
           <strong>{PROFILE.name}</strong>
           <span className="w-sub">{t.nav.role}</span>
           <span className="w-status"><i className="dot-live" />{t.contact.statusValue}</span>
         </div>
-      </button>
+      </LiquidGlass>
       <div className="home-grid">
         {apps.map((id) => (
           <button key={id} className="home-app" onClick={() => sys.open(id)}>

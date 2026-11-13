@@ -77,6 +77,7 @@ h1, h2, h3, p { margin: 0; }
   background:
     radial-gradient(180px circle at var(--lx, 50%) var(--ly, 0%), rgb(255 255 255 / calc(var(--lg-glow) * 0.2)), transparent 70%),
     linear-gradient(180deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0) 38%, rgb(255 255 255 / 0) 70%, rgb(255 255 255 / 0.04)),
+    linear-gradient(90deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0) 14%, rgb(255 255 255 / 0) 86%, rgb(255 255 255 / 0.045)),
     var(--lg-tint);
   -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-sat)) brightness(1.08);
   backdrop-filter: blur(var(--lg-blur)) var(--lg-filter, ) saturate(var(--lg-sat)) brightness(1.08);
@@ -115,6 +116,9 @@ h1, h2, h3, p { margin: 0; }
 @media (hover: hover) { .lg-i:hover { --lg-glow: 1; } }
 .lg.lg-i.is-pressed { --lg-glow: 1.8; scale: 1.045; transition-duration: 0.15s, 0.3s, 0.35s, 0.5s; }
 .dock.lg-i.is-pressed { scale: 1.015; }
+/* <LiquidGlass> moves with spring physics in JS (liquid stretch, swell, wobble), so the CSS swell/lean stand down */
+.lg.lg-spring.lg-i, .lg.lg-spring.lg-i.is-pressed { scale: none; translate: none; }
+.lg-spring { will-change: transform; }
 @media (prefers-reduced-motion: reduce) {
   .lg.lg-i, .lg.lg-i.is-pressed { scale: 1; translate: none; }
 }
