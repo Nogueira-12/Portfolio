@@ -25,8 +25,8 @@ export const SECTIONS = ['carhelp', 'work', 'about', 'experience', 'collaborate'
 export const CARHELP = {
   url: 'https://carhelp.pt',
   icon: 'carhelp/app-icon.png',
-  // link of the app on Google Play — until it's set, the Google Play badge opens carhelp.pt
-  playStore: '',
+  // link of the app on Google Play (the Google Play badge opens it)
+  playStore: 'https://play.google.com/store/apps/details?id=com.tomas.car_help',
   steps: ['analise', 'garagem', 'inicio'],
 };
 

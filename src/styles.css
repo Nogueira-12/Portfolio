@@ -228,7 +228,7 @@ h1, h2, h3, p { margin: 0; }
 /* widgets */
 .widgets { position: absolute; top: calc(var(--menu-h) + 22px); left: 22px; width: 330px; display: grid; gap: 14px; z-index: 1; }
 .widget {
-  display: flex; text-align: left;
+  position: relative; display: flex; text-align: left;
   background: var(--glass);
   backdrop-filter: blur(26px) saturate(1.5);
   -webkit-backdrop-filter: blur(26px) saturate(1.5);
@@ -238,6 +238,11 @@ h1, h2, h3, p { margin: 0; }
   transition: transform 0.25s var(--ease), border-color 0.2s;
 }
 button.widget:hover { transform: translateY(-2px); border-color: var(--line-2); }
+/* Lifting on hover moves the element away from a cursor resting near its bottom edge: it loses :hover, drops back,
+   regains it, and shakes in a loop. While hovered, an invisible strip under it fills the gap the lift opens. */
+button.widget:hover::after, .pcard:hover::after, .readme-start button:hover::after {
+  content: ''; position: absolute; left: 0; right: 0; top: 100%; height: 5px;
+}
 .widget-profile { align-items: center; gap: 14px; }
 .widget-profile img { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; flex: none; }
 .widget-profile div { display: grid; gap: 1px; min-width: 0; }
@@ -246,9 +251,12 @@ button.widget:hover { transform: translateY(-2px); border-color: var(--line-2); 
 .w-sub { font-size: 12.5px; color: var(--muted); }
 .w-status { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; color: #bdf5cf; margin-top: 5px; }
 .w-status .dot-live { width: 6px; height: 6px; }
-.widget-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-.widget-carhelp { flex-direction: column; gap: 4px; aspect-ratio: 1; justify-content: flex-end; position: relative; overflow: hidden; }
-.widget-carhelp::before { content: ''; position: absolute; inset: -40% -40% auto auto; width: 140%; height: 140%; background: radial-gradient(circle, rgba(61, 107, 255, 0.4), transparent 60%); pointer-events: none; }
+.widget-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+/* the blue glow is a background layer (not a clipped pseudo-element), so nothing here needs overflow: hidden */
+.widget-carhelp {
+  flex-direction: column; gap: 4px; aspect-ratio: 1; justify-content: flex-end;
+  background: radial-gradient(circle at 70% 30%, rgba(61, 107, 255, 0.4), transparent 60%), var(--glass);
+}
 .widget-carhelp .app-icon { margin-bottom: auto; }
 .widget-carhelp strong { font-size: 15px; }
 .widget-clock { flex-direction: column; align-items: center; justify-content: center; gap: 8px; aspect-ratio: 1; }
@@ -547,9 +555,9 @@ kbd { font: 500 11px var(--mono); padding: 2px 6px; border-radius: 5px; border: 
 .finder-main { flex: 1; min-width: 0; display: flex; flex-direction: column; }
 .finder-content { flex: 1; overflow: auto; padding: 16px; scrollbar-width: thin; }
 .pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; }
-.pcard { position: relative; text-align: left; border-radius: 12px; overflow: hidden; background: var(--fill); border: 1px solid var(--line); transition: transform 0.2s var(--ease), border-color 0.2s, background 0.2s; container-type: inline-size; }
+.pcard { position: relative; text-align: left; border-radius: 12px; background: var(--fill); border: 1px solid var(--line); transition: transform 0.2s var(--ease), border-color 0.2s, background 0.2s; container-type: inline-size; }
 .pcard:hover { transform: translateY(-3px); border-color: rgba(215, 255, 63, 0.4); background: var(--fill-2); }
-.pcard .cover { border-bottom: 1px solid var(--line); }
+.pcard .cover { border-bottom: 1px solid var(--line); border-radius: 11px 11px 0 0; }
 .pcard-meta { padding: 10px 12px 12px; display: grid; gap: 1px; }
 .pcard-meta strong { font-size: 14px; }
 .pcard-meta span { font-size: 12px; color: var(--muted); }
@@ -781,7 +789,7 @@ a.contact-row:hover, button.contact-row:hover { background: var(--fill-2); }
 .readme h2 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #8b7a3c; margin: 24px 0 8px; }
 .readme ul { padding-left: 20px; margin: 0; display: grid; gap: 4px; }
 .readme-start { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-.readme-start button { display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; border: 1px solid #ece6cf; background: #fff; text-align: left; color: inherit; transition: border-color 0.15s, transform 0.15s; }
+.readme-start button { position: relative; display: flex; align-items: center; gap: 10px; padding: 10px; border-radius: 10px; border: 1px solid #ece6cf; background: #fff; text-align: left; color: inherit; transition: border-color 0.15s, transform 0.15s; }
 .readme-start button:hover { border-color: #c9b66a; transform: translateY(-1px); }
 .readme-start span { display: grid; font-size: 12.5px; color: #7a7462; line-height: 1.3; }
 .readme-start strong { font-size: 13.5px; color: #2b2a26; }
