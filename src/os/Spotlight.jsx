@@ -4,7 +4,6 @@ import { useSystem } from './system.jsx';
 import { DOCK_ORDER } from './meta.js';
 import { AppIcon, Glyph, SocialIcon } from './icons.jsx';
 import { PROFILE, SOCIALS } from '../data.js';
-import { useLiquidGlass } from './liquid.js';
 
 const norm = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
@@ -16,7 +15,6 @@ export default function Spotlight() {
   const [idx, setIdx] = useState(0);
   const inputRef = useRef(null);
   const listRef = useRef(null);
-  const glass = useLiquidGlass({ depth: 30, strength: 38 });
   const close = () => sys.setSpotlight(false);
 
   const groups = useMemo(() => {
@@ -62,7 +60,7 @@ export default function Spotlight() {
   let n = -1;
   return (
     <motion.div className="spot-backdrop" onPointerDown={(e) => e.target === e.currentTarget && close()} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.15 }}>
-      <motion.div ref={glass} className="spot lg" role="dialog" aria-label={s.aria} initial={{ opacity: 0, y: -10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -6, scale: 0.98 }} transition={{ duration: 0.18 }}>
+      <motion.div className="spot" role="dialog" aria-label={s.aria} initial={{ opacity: 0, y: -10, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -6, scale: 0.98 }} transition={{ duration: 0.18 }}>
         <div className="spot-input">
           <Glyph name="search" size={18} />
           <input ref={inputRef} value={q} onChange={(e) => setQ(e.target.value)} onKeyDown={onKey} placeholder={s.placeholder} aria-label={s.placeholder} spellCheck="false" autoComplete="off" />

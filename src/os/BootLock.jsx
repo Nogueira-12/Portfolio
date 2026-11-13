@@ -3,9 +3,6 @@ import { motion } from 'motion/react';
 import { useSystem, useNow } from './system.jsx';
 import { Glyph, Logo } from './icons.jsx';
 import { PROFILE } from '../data.js';
-import LiquidGlass from './LiquidGlass.jsx';
-
-const LOCK_GLASS = { depth: 20, strength: 26, aberration: 0.2 };
 
 export function Boot() {
   const sys = useSystem();
@@ -63,9 +60,9 @@ export function Lock() {
         <img src={PROFILE.photo} alt="" />
         <strong>{PROFILE.name}</strong>
         <span>{t.os.lock.role}</span>
-        <LiquidGlass as="button" refraction={LOCK_GLASS} className="lock-btn" onClick={(e) => { e.stopPropagation(); sys.unlock(); }}>
+        <button className="lock-btn" onClick={(e) => { e.stopPropagation(); sys.unlock(); }}>
           {t.os.lock.login} <Glyph name="chevron" size={14} />
-        </LiquidGlass>
+        </button>
         <small>{t.os.lock.enter}</small>
       </motion.div>
     </motion.div>

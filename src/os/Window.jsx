@@ -3,7 +3,6 @@ import { motion, useAnimationControls } from 'motion/react';
 import { useSystem, workArea } from './system.jsx';
 import { APP_META, MENU_H, clamp, dockIdOf } from './meta.js';
 import { AppIcon, Glyph } from './icons.jsx';
-import { useLiquidGlass } from './liquid.js';
 
 const EDGES = ['n', 's', 'e', 'w', 'ne', 'nw', 'se', 'sw'];
 const SPRING = { type: 'spring', stiffness: 420, damping: 34, mass: 0.8 };
@@ -160,7 +159,7 @@ export default function Window({ win, title, iconId, children }) {
   return (
     <motion.section
       ref={ref}
-      className={`win lg${focused ? ' is-focused' : ''}${max ? ' is-max' : ''}${anim ? ' is-anim' : ''}${win.minimized ? ' is-min' : ''}`}
+      className={`win${focused ? ' is-focused' : ''}${max ? ' is-max' : ''}${anim ? ' is-anim' : ''}${win.minimized ? ' is-min' : ''}`}
       style={style}
       animate={controls}
       exit={{ opacity: 0, scale: 0.94, transition: { duration: 0.16, ease: 'easeIn' } }}
@@ -199,8 +198,7 @@ export default function Window({ win, title, iconId, children }) {
 /* the translucent preview shown while dragging a window to a screen edge */
 export function SnapPreview() {
   const { snap } = useSystem();
-  const glass = useLiquidGlass({ depth: 40, strength: 50, aberration: 0.18 });
   if (!snap) return null;
   const r = snapRect(snap);
-  return <div ref={glass} key={snap} className="snap-preview lg" style={{ left: r.x + 6, top: r.y + 6, width: r.w - 12, height: r.h - 12 }} />;
+  return <div className="snap-preview" style={{ left: r.x + 6, top: r.y + 6, width: r.w - 12, height: r.h - 12 }} />;
 }

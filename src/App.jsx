@@ -1,15 +1,12 @@
-import { useEffect } from 'react';
 import { AnimatePresence } from 'motion/react';
 import { Analytics } from '@vercel/analytics/react';
 import { SpeedInsights } from '@vercel/speed-insights/react';
 import { SystemProvider, useSystem } from './os/system.jsx';
 import { Boot, Lock } from './os/BootLock.jsx';
 import Desktop from './os/Desktop.jsx';
-import { installGlassLight } from './os/liquid.js';
 
 function Screen() {
   const { phase, wallpaper } = useSystem();
-  useEffect(() => installGlassLight(), []);
   return (
     <div className={`os wp-${wallpaper}`}>
       <div className="wallpaper" aria-hidden="true"><i /><i /><i /></div>

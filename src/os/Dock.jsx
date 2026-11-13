@@ -3,7 +3,6 @@ import { motion, useAnimationControls, useMotionValue, useSpring, useTransform }
 import { useSystem } from './system.jsx';
 import { DOCK_MOBILE, DOCK_ORDER, dockIdOf } from './meta.js';
 import { AppIcon } from './icons.jsx';
-import { useLiquidGlass } from './liquid.js';
 
 const BASE = 50;
 const MAX = 78;
@@ -13,7 +12,6 @@ export default function Dock() {
   const sys = useSystem();
   const mouseX = useMotionValue(Infinity);
   const apps = sys.mobile ? DOCK_MOBILE : DOCK_ORDER;
-  const glass = useLiquidGlass({ depth: 26, strength: 34, aberration: 0.16 });
 
   const running = new Set(sys.windows.map((w) => dockIdOf(w.app)));
   const focusedApp = sys.windows.find((w) => w.id === sys.focusedId);
@@ -21,8 +19,7 @@ export default function Dock() {
   return (
     <nav className="dock-wrap" aria-label={sys.t.os.dock.aria}>
       <motion.div
-        ref={glass}
-        className="dock lg lg-i"
+        className="dock"
         onMouseMove={(e) => !sys.mobile && mouseX.set(e.clientX)}
         onMouseLeave={() => mouseX.set(Infinity)}
       >

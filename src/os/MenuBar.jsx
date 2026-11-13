@@ -4,8 +4,6 @@ import { useSystem, useNow } from './system.jsx';
 import { DOCK_ORDER, WALLPAPERS } from './meta.js';
 import { AppIcon, Battery, Glyph, Logo } from './icons.jsx';
 import { appTitle } from './apps.jsx';
-import { useLiquidGlass } from './liquid.js';
-import LiquidGlass from './LiquidGlass.jsx';
 
 const REPO = 'https://github.com/Nogueira-12/Portfolio';
 
@@ -110,11 +108,9 @@ export default function MenuBar() {
 }
 
 function Menu({ items, run }) {
-  const glass = useLiquidGlass({ depth: 18, strength: 22 });
   return (
     <motion.div
-      ref={glass}
-      className="menu lg"
+      className="menu"
       role="menu"
       initial={{ opacity: 0, y: -4 }}
       animate={{ opacity: 1, y: 0 }}
@@ -146,18 +142,16 @@ function Menu({ items, run }) {
 function ControlCenter({ onClose }) {
   const sys = useSystem();
   const c = sys.t.os.control;
-  const glass = useLiquidGlass({ depth: 24, strength: 30 });
   return (
     <motion.div
-      ref={glass}
-      className="control lg"
+      className="control"
       initial={{ opacity: 0, y: -6, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -6, transition: { duration: 0.12 } }}
       transition={{ duration: 0.18 }}
       onPointerDown={(e) => e.stopPropagation()}
     >
-      <div className="cc-block lg">
+      <div className="cc-block">
         <span className="cc-label">{c.language}</span>
         <div className="seg">
           {['pt', 'en'].map((l) => (
@@ -165,7 +159,7 @@ function ControlCenter({ onClose }) {
           ))}
         </div>
       </div>
-      <div className="cc-block lg">
+      <div className="cc-block">
         <span className="cc-label">{c.wallpaper}</span>
         <div className="cc-walls">
           {WALLPAPERS.map((w) => (
@@ -174,9 +168,8 @@ function ControlCenter({ onClose }) {
         </div>
       </div>
       <div className="cc-row">
-        {/* inside the Control Centre's glass: no second backdrop, so no refraction of their own */}
-        <LiquidGlass as="button" refraction={false} className="cc-btn" onClick={() => { onClose(); sys.lock(); }}><Glyph name="lock" size={14} /> {sys.t.os.menu.lock}</LiquidGlass>
-        <LiquidGlass as="button" refraction={false} className="cc-btn" onClick={() => { onClose(); sys.open('settings'); }}><Glyph name="sliders" size={14} /> {sys.t.os.apps.settings}</LiquidGlass>
+        <button className="cc-btn" onClick={() => { onClose(); sys.lock(); }}><Glyph name="lock" size={14} /> {sys.t.os.menu.lock}</button>
+        <button className="cc-btn" onClick={() => { onClose(); sys.open('settings'); }}><Glyph name="sliders" size={14} /> {sys.t.os.apps.settings}</button>
       </div>
     </motion.div>
   );
