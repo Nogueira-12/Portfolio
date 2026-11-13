@@ -109,7 +109,7 @@ export default function MenuBar() {
 }
 
 function Menu({ items, run }) {
-  const glass = useLiquidGlass({ depth: 14, strength: 10 });
+  const glass = useLiquidGlass({ depth: 18, strength: 22 });
   return (
     <motion.div
       ref={glass}
@@ -145,7 +145,7 @@ function Menu({ items, run }) {
 function ControlCenter({ onClose }) {
   const sys = useSystem();
   const c = sys.t.os.control;
-  const glass = useLiquidGlass({ depth: 18, strength: 12 });
+  const glass = useLiquidGlass({ depth: 24, strength: 30 });
   return (
     <motion.div
       ref={glass}
@@ -173,8 +173,8 @@ function ControlCenter({ onClose }) {
         </div>
       </div>
       <div className="cc-row">
-        <button className="cc-btn lg lg-i" onClick={() => { onClose(); sys.lock(); }}><Glyph name="lock" size={14} /> {sys.t.os.menu.lock}</button>
-        <button className="cc-btn lg lg-i" onClick={() => { onClose(); sys.open('settings'); }}><Glyph name="sliders" size={14} /> {sys.t.os.apps.settings}</button>
+        <button className="cc-btn lg lg-i lg-m" onClick={() => { onClose(); sys.lock(); }}><Glyph name="lock" size={14} /> {sys.t.os.menu.lock}</button>
+        <button className="cc-btn lg lg-i lg-m" onClick={() => { onClose(); sys.open('settings'); }}><Glyph name="sliders" size={14} /> {sys.t.os.apps.settings}</button>
       </div>
     </motion.div>
   );

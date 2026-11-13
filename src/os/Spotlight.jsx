@@ -16,7 +16,7 @@ export default function Spotlight() {
   const [idx, setIdx] = useState(0);
   const inputRef = useRef(null);
   const listRef = useRef(null);
-  const glass = useLiquidGlass({ depth: 22, strength: 14 });
+  const glass = useLiquidGlass({ depth: 30, strength: 38 });
   const close = () => sys.setSpotlight(false);
 
   const groups = useMemo(() => {

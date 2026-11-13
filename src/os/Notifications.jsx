@@ -16,7 +16,7 @@ export default function Notifications() {
 
 function Note({ n }) {
   const sys = useSystem();
-  const glass = useLiquidGlass({ depth: 16, strength: 12 });
+  const glass = useLiquidGlass({ depth: 22, strength: 28 });
   return (
     <motion.div
       ref={glass}

@@ -13,7 +13,7 @@ export default function Dock() {
   const sys = useSystem();
   const mouseX = useMotionValue(Infinity);
   const apps = sys.mobile ? DOCK_MOBILE : DOCK_ORDER;
-  const glass = useLiquidGlass({ depth: 20, strength: 16, aberration: 0.25 });
+  const glass = useLiquidGlass({ depth: 26, strength: 34, aberration: 0.16 });
 
   const running = new Set(sys.windows.map((w) => dockIdOf(w.app)));
   const focusedApp = sys.windows.find((w) => w.id === sys.focusedId);

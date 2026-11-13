@@ -116,9 +116,12 @@ function createFilter(id, strength, aberration) {
   }
   filter.append(merge);
 
-  const displace = (scale, result) => node('feDisplacementMap', {
-    in: 'SourceGraphic', in2: 'map', scale, xChannelSelector: 'R', yChannelSelector: 'G', result,
-  });
+  const lenses = []; // [node, base scale]: pressing the glass thickens every lens for a moment
+  const displace = (scale, result) => {
+    const n = node('feDisplacementMap', { in: 'SourceGraphic', in2: 'map', scale, xChannelSelector: 'R', yChannelSelector: 'G', ...(result && { result }) });
+    lenses.push([n, scale]);
+    return n;
+  };
   if (aberration) {
     // red bends a little more than green, blue a little less: a faint prism fringe along the rim
     const keep = ['1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0', '0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0', '0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0'];
@@ -132,8 +135,10 @@ function createFilter(id, strength, aberration) {
     filter.append(displace(strength));
   }
   host.append(filter);
-  return { filter, images };
+  return { filter, images, lenses };
 }
+
+const glassOf = new WeakMap(); // element → { press(on) }
 
 function radiusOf(el, w) {
   const v = getComputedStyle(el).borderTopLeftRadius;
@@ -149,10 +154,28 @@ function radiusOf(el, w) {
 export function attachGlass(el, { depth = 16, strength = 12, aberration = 0 } = {}) {
   if (!liquidSupported() || !el) return () => {};
   const id = `lg-${++uid}`;
-  const { filter, images } = createFilter(id, strength, aberration);
+  const { filter, images, lenses } = createFilter(id, strength, aberration);
   let curKey = '';
   let curSize = '';
   let raf = 0;
+
+  // press: a small spring drives the lens strength up (and back), overshooting a little like jelly
+  let k = 1;
+  let v = 0;
+  let target = 1;
+  let springRaf = 0;
+  const step = () => {
+    v = (v + (target - k) * 0.16) * 0.74;
+    k += v;
+    for (const [n, base] of lenses) n.setAttribute('scale', (base * k).toFixed(2));
+    springRaf = Math.abs(target - k) + Math.abs(v) > 0.002 ? requestAnimationFrame(step) : 0;
+  };
+  glassOf.set(el, {
+    press(on) {
+      target = on ? 1.35 : 1;
+      if (!springRaf) springRaf = requestAnimationFrame(step);
+    },
+  });
 
   const place = (p, x, y, w, h) => {
     const im = images[p];
@@ -199,6 +222,8 @@ export function attachGlass(el, { depth = 16, strength = 12, aberration = 0 } = 
   return () => {
     ro.disconnect();
     cancelAnimationFrame(raf);
+    cancelAnimationFrame(springRaf);
+    glassOf.delete(el);
     filter.remove();
     el.style.removeProperty('--lg-filter');
   };
@@ -215,19 +240,81 @@ export function useLiquidGlass(opts) {
   }, []);
 }
 
-/* the highlight that follows the pointer across interactive glass (.lg-i) */
+/*
+ * Interactive glass (.lg-i):
+ * - a highlight follows the pointer (--lx/--ly) and the bright side of the rim turns to face it (--lg-angle)
+ * - small controls (.lg-m) lean a few px toward the pointer (--mx/--my)
+ * - pressing swells the sheet (.is-pressed, CSS) and thickens its lens (liquid.js)
+ */
+const REST_ANGLE = 145;
+const PULL = 0.07; // how strongly .lg-m leans toward the pointer
+const MAX_PULL = 4; // px
+
 export function installGlassLight() {
-  const on = (e) => {
+  let hot = null;
+  let pressed = null;
+
+  // turn to the nearest equivalent angle, so the transition never spins the long way round
+  const turn = (el, a) => {
+    const prev = el.__lgAngle ?? REST_ANGLE;
+    const next = prev + ((((a - prev) % 360) + 540) % 360) - 180;
+    el.__lgAngle = next;
+    el.style.setProperty('--lg-angle', `${next.toFixed(1)}deg`);
+  };
+  const rest = (el) => {
+    turn(el, REST_ANGLE);
+    el.style.removeProperty('--mx');
+    el.style.removeProperty('--my');
+  };
+
+  const move = (e) => {
     const el = e.target instanceof Element ? e.target.closest('.lg-i') : null;
+    if (hot && hot !== el) rest(hot);
+    hot = el;
     if (!el) return;
     const r = el.getBoundingClientRect();
-    el.style.setProperty('--lx', `${Math.round(e.clientX - r.left)}px`);
-    el.style.setProperty('--ly', `${Math.round(e.clientY - r.top)}px`);
+    const x = e.clientX - r.left;
+    const y = e.clientY - r.top;
+    el.style.setProperty('--lx', `${Math.round(x)}px`);
+    el.style.setProperty('--ly', `${Math.round(y)}px`);
+    const dx = x - r.width / 2;
+    const dy = y - r.height / 2;
+    // the gradient starts on the side opposite its direction, so point it away from the pointer
+    turn(el, (Math.atan2(dx, -dy) * 180) / Math.PI + 180);
+    if (el.classList.contains('lg-m')) {
+      const c = (n) => Math.max(-MAX_PULL, Math.min(MAX_PULL, n * PULL));
+      el.style.setProperty('--mx', `${c(dx).toFixed(1)}px`);
+      el.style.setProperty('--my', `${c(dy).toFixed(1)}px`);
+    }
   };
-  window.addEventListener('pointermove', on, { passive: true });
-  window.addEventListener('pointerdown', on, { passive: true });
+  const down = (e) => {
+    move(e);
+    const el = e.target instanceof Element ? e.target.closest('.lg-i') : null;
+    if (!el) return;
+    pressed = el;
+    el.classList.add('is-pressed');
+    glassOf.get(el)?.press(true);
+  };
+  const up = () => {
+    if (!pressed) return;
+    pressed.classList.remove('is-pressed');
+    glassOf.get(pressed)?.press(false);
+    pressed = null;
+  };
+  const out = (e) => { if (!e.relatedTarget && hot) { rest(hot); hot = null; } };
+
+  window.addEventListener('pointermove', move, { passive: true });
+  window.addEventListener('pointerdown', down, { passive: true });
+  window.addEventListener('pointerup', up, { passive: true });
+  window.addEventListener('pointercancel', up, { passive: true });
+  window.addEventListener('blur', up);
+  document.addEventListener('pointerout', out, { passive: true });
   return () => {
-    window.removeEventListener('pointermove', on);
-    window.removeEventListener('pointerdown', on);
+    window.removeEventListener('pointermove', move);
+    window.removeEventListener('pointerdown', down);
+    window.removeEventListener('pointerup', up);
+    window.removeEventListener('pointercancel', up);
+    window.removeEventListener('blur', up);
+    document.removeEventListener('pointerout', out);
   };
 }

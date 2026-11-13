@@ -12,7 +12,7 @@ import Notifications from './Notifications.jsx';
 import { PROFILE } from '../data.js';
 import { useLiquidGlass } from './liquid.js';
 
-const WIDGET_GLASS = { depth: 18, strength: 14, aberration: 0.2 };
+const WIDGET_GLASS = { depth: 26, strength: 32, aberration: 0.16 };
 
 /* the icons on the desktop (open on double-click; on phones the home screen shows every app instead) */
 const ICONS = [
@@ -186,7 +186,7 @@ function Widgets() {
 
   return (
     <div className="widgets">
-      <button ref={glassProfile} className="widget widget-profile lg lg-i" onClick={() => sys.open('about')}>
+      <button ref={glassProfile} className="widget widget-profile lg lg-i lg-m" onClick={() => sys.open('about')}>
         <img src={PROFILE.photo} alt="" />
         <div>
           <span className="w-kicker">{t.os.widgets.hello}</span>
@@ -196,7 +196,7 @@ function Widgets() {
         </div>
       </button>
       <div className="widget-row">
-        <button ref={glassCarhelp} className="widget widget-carhelp lg lg-i" onClick={() => sys.open('carhelp')}>
+        <button ref={glassCarhelp} className="widget widget-carhelp lg lg-i lg-m" onClick={() => sys.open('carhelp')}>
           <AppIcon id="carhelp" size={44} />
           <strong>CarHelp</strong>
           <span className="w-sub">{t.os.widgets.carhelpPlay}</span>
@@ -227,7 +227,7 @@ function HomeScreen() {
   const glass = useLiquidGlass(WIDGET_GLASS);
   return (
     <div className="home">
-      <button ref={glass} className="widget widget-profile lg lg-i" onClick={() => sys.open('about')}>
+      <button ref={glass} className="widget widget-profile lg lg-i lg-m" onClick={() => sys.open('about')}>
         <img src={PROFILE.photo} alt="" />
         <div>
           <strong>{PROFILE.name}</strong>
@@ -251,7 +251,7 @@ function HomeScreen() {
 function ContextMenu({ at, onClose }) {
   const sys = useSystem();
   const c = sys.t.os.ctx;
-  const glass = useLiquidGlass({ depth: 14, strength: 10 });
+  const glass = useLiquidGlass({ depth: 18, strength: 22 });
   const items = [
     { label: c.terminal, icon: 'terminal', action: () => sys.open('terminal') },
     { label: c.settings, icon: 'settings', action: () => sys.open('settings') },

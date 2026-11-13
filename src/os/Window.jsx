@@ -199,7 +199,7 @@ export default function Window({ win, title, iconId, children }) {
 /* the translucent preview shown while dragging a window to a screen edge */
 export function SnapPreview() {
   const { snap } = useSystem();
-  const glass = useLiquidGlass({ depth: 28, strength: 22, aberration: 0.25 });
+  const glass = useLiquidGlass({ depth: 40, strength: 50, aberration: 0.18 });
   if (!snap) return null;
   const r = snapRect(snap);
   return <div ref={glass} key={snap} className="snap-preview lg" style={{ left: r.x + 6, top: r.y + 6, width: r.w - 12, height: r.h - 12 }} />;
