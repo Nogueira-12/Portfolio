@@ -10,6 +10,9 @@ import Window, { SnapPreview } from './Window.jsx';
 import Spotlight from './Spotlight.jsx';
 import Notifications from './Notifications.jsx';
 import { PROFILE } from '../data.js';
+import { useLiquidGlass } from './liquid.js';
+
+const WIDGET_GLASS = { depth: 18, strength: 14, aberration: 0.2 };
 
 /* the icons on the desktop (open on double-click; on phones the home screen shows every app instead) */
 const ICONS = [
@@ -177,10 +180,13 @@ function Widgets() {
   const sec = now.getSeconds();
   const min = now.getMinutes();
   const hr = Number(lisbon.slice(0, 2)) % 12;
+  const glassProfile = useLiquidGlass(WIDGET_GLASS);
+  const glassCarhelp = useLiquidGlass(WIDGET_GLASS);
+  const glassClock = useLiquidGlass(WIDGET_GLASS);
 
   return (
     <div className="widgets">
-      <button className="widget widget-profile" onClick={() => sys.open('about')}>
+      <button ref={glassProfile} className="widget widget-profile lg lg-i" onClick={() => sys.open('about')}>
         <img src={PROFILE.photo} alt="" />
         <div>
           <span className="w-kicker">{t.os.widgets.hello}</span>
@@ -190,12 +196,12 @@ function Widgets() {
         </div>
       </button>
       <div className="widget-row">
-        <button className="widget widget-carhelp" onClick={() => sys.open('carhelp')}>
+        <button ref={glassCarhelp} className="widget widget-carhelp lg lg-i" onClick={() => sys.open('carhelp')}>
           <AppIcon id="carhelp" size={44} />
           <strong>CarHelp</strong>
           <span className="w-sub">{t.os.widgets.carhelpPlay}</span>
         </button>
-        <div className="widget widget-clock" aria-label={`${t.os.widgets.clock} ${lisbon}`}>
+        <div ref={glassClock} className="widget widget-clock lg" aria-label={`${t.os.widgets.clock} ${lisbon}`}>
           <svg viewBox="0 0 100 100" aria-hidden="true">
             <circle cx="50" cy="50" r="46" className="c-face" />
             {Array.from({ length: 12 }, (_, i) => (
@@ -218,9 +224,10 @@ function HomeScreen() {
   const sys = useSystem();
   const { t } = sys;
   const apps = [...DOCK_ORDER, 'readme'];
+  const glass = useLiquidGlass(WIDGET_GLASS);
   return (
     <div className="home">
-      <button className="widget widget-profile" onClick={() => sys.open('about')}>
+      <button ref={glass} className="widget widget-profile lg lg-i" onClick={() => sys.open('about')}>
         <img src={PROFILE.photo} alt="" />
         <div>
           <strong>{PROFILE.name}</strong>
@@ -244,6 +251,7 @@ function HomeScreen() {
 function ContextMenu({ at, onClose }) {
   const sys = useSystem();
   const c = sys.t.os.ctx;
+  const glass = useLiquidGlass({ depth: 14, strength: 10 });
   const items = [
     { label: c.terminal, icon: 'terminal', action: () => sys.open('terminal') },
     { label: c.settings, icon: 'settings', action: () => sys.open('settings') },
@@ -263,7 +271,8 @@ function ContextMenu({ at, onClose }) {
   }, [onClose]);
   return (
     <motion.div
-      className="menu ctx"
+      ref={glass}
+      className="menu ctx lg"
       role="menu"
       style={{ left: at.x, top: at.y }}
       initial={{ opacity: 0, scale: 0.97 }}

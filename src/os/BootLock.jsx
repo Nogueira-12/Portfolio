@@ -3,6 +3,7 @@ import { motion } from 'motion/react';
 import { useSystem, useNow } from './system.jsx';
 import { Glyph, Logo } from './icons.jsx';
 import { PROFILE } from '../data.js';
+import { useLiquidGlass } from './liquid.js';
 
 export function Boot() {
   const sys = useSystem();
@@ -31,6 +32,7 @@ export function Lock() {
   const date = new Intl.DateTimeFormat(locale, { weekday: 'long', day: 'numeric', month: 'long' }).format(now);
 
   const { unlock } = sys;
+  const glass = useLiquidGlass({ depth: 14, strength: 12, aberration: 0.3 });
   useEffect(() => {
     const on = (e) => { if (e.key === 'Enter' || e.key === ' ') unlock(); };
     const wheel = (e) => { if (e.deltaY > 30) unlock(); };
@@ -60,7 +62,7 @@ export function Lock() {
         <img src={PROFILE.photo} alt="" />
         <strong>{PROFILE.name}</strong>
         <span>{t.os.lock.role}</span>
-        <button className="lock-btn" onClick={(e) => { e.stopPropagation(); sys.unlock(); }}>
+        <button ref={glass} className="lock-btn lg lg-i" onClick={(e) => { e.stopPropagation(); sys.unlock(); }}>
           {t.os.lock.login} <Glyph name="chevron" size={14} />
         </button>
         <small>{t.os.lock.enter}</small>
